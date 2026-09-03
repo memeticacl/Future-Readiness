@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Readiness · Memética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F1E9D9; --bg-card: #FBF6EA; --bg-card-2: #FDFAF2; --bg-elev: #FFFDF7;
+  --orange: #F03400; --orange-deep: #8E1F00; --orange-ink: #B32700; --orange-soft: #A82400;
+  --cream: #1A1712; --cream-dim: #3E382E; --muted: #625A4C; --muted-dim: #6E6657;
+  --line: #DFD5C0; --line-hi: #C9BDA3;
+  --ok: #46732F; --info: #1E6E9C; --warn: #9A5411;
+  --display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  --sans: 'Archivo', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg); color: var(--cream); font-family: var(--sans); font-size: 16.5px;
+  line-height: 1.62; -webkit-font-smoothing: antialiased; position: relative; padding-bottom: 80px;
+}
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:100; opacity:.05; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+::selection { background: var(--orange); color:#fff; }
+
+/* ---------- topnav ---------- */
+nav.topnav {
+  position:sticky; top:0; z-index:50; padding:18px 40px; display:flex;
+  justify-content:space-between; align-items:center;
+  background:linear-gradient(to bottom, rgba(241,233,217,.97) 60%, rgba(241,233,217,0) 100%);
+  backdrop-filter: blur(8px);
+}
+nav.topnav .blogo { width:104px; height:auto; display:block; }
+nav.topnav .meta-right { color:var(--muted); font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+@media (max-width:700px){ nav.topnav{padding:14px 20px} nav.topnav .meta-right{display:none} }
+
+.shell { max-width: 800px; margin:0 auto; padding: 0 40px; }
+@media (max-width:700px){ .shell{padding:0 20px} }
+
+/* ---------- tipografía ---------- */
+.eyebrow {
+  display:inline-flex; align-items:center; gap:12px; font-size:12px; font-weight:700;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--orange-ink); margin-bottom:18px;
+}
+.eyebrow::before { content:""; width:24px; height:1px; background:var(--orange); }
+h1 { font-family:var(--display); font-size:clamp(33px,5.2vw,48px); line-height:1.06; letter-spacing:-.015em; margin-bottom:18px; }
+h2 { font-family:var(--display); font-size:clamp(23px,3.2vw,29px); line-height:1.15; margin-bottom:12px; }
+h3 { font-size:18px; font-weight:800; letter-spacing:.01em; margin-bottom:12px; }
+.lede { font-size:19px; color:var(--cream-dim); max-width:62ch; line-height:1.55; }
+.small { font-size:14.5px; color:var(--muted); line-height:1.55; }
+.mono { font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+
+/* ---------- portada ---------- */
+.hero { padding: 40px 0 30px; min-height:66vh; display:flex; flex-direction:column; justify-content:center; }
+.hero .facts { display:flex; flex-wrap:wrap; gap:26px; margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+.hero .facts div { font-size:13px; }
+.hero .facts b { display:block; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:3px; }
+
+/* ---------- progreso ---------- */
+.progress { display:flex; gap:6px; margin:0 0 30px; }
+.progress span { flex:1; height:3px; background:var(--line); border-radius:2px; transition:background .3s; }
+.progress span.on { background:var(--orange); }
+.stepmeta { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+
+/* ---------- tarjetas y campos ---------- */
+.card {
+  background:var(--bg-card); border:1px solid var(--line); border-radius:4px;
+  padding:26px 28px; margin-bottom:18px;
+}
+@media (max-width:700px){ .card{padding:20px} }
+.pillarhead {
+  font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--orange-ink); font-weight:500; margin-bottom:4px;
+}
+.pillarsub { font-size:15px; color:var(--muted); margin-bottom:22px; line-height:1.5; }
+.q { margin-bottom:32px; }
+.q:last-child { margin-bottom:0; }
+.qnum { font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--orange-ink); font-weight:500; }
+.qtext { font-size:18px; font-weight:700; line-height:1.42; margin:8px 0 16px; }
+.qhint { font-size:14.5px; color:var(--muted); margin:-8px 0 16px; }
+
+.opts { display:flex; flex-direction:column; gap:8px; }
+.opt {
+  display:flex; align-items:flex-start; gap:12px; padding:13px 16px; cursor:pointer;
+  background:var(--bg-card-2); border:1px solid var(--line); border-radius:4px;
+  font-size:16px; line-height:1.45; transition:border-color .15s, background .15s;
+}
+.opt:hover { border-color:var(--line-hi); background:var(--bg-elev); }
+.opt input { position:absolute; opacity:0; width:0; height:0; }
+.opt .dot {
+  flex-shrink:0; width:22px; height:22px; border-radius:50%; border:1.5px solid var(--line-hi);
+  display:grid; place-items:center; font-family:var(--mono); font-size:11px; color:var(--muted);
+  margin-top:1px; transition:all .15s;
+}
+.opt.sel { border-color:var(--orange); background:var(--bg-elev); }
+.opt.sel .dot { border-color:var(--orange); background:var(--orange); color:#fff; }
+
+.likert { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; }
+.likert .opt { flex-direction:column; align-items:center; text-align:center; gap:8px; padding:14px 7px; font-size:13.5px; }
+.likert .opt .dot { margin-top:0; }
+@media (max-width:620px){ .likert{grid-template-columns:repeat(5,1fr); } .likert .opt{font-size:11px; padding:11px 4px} }
+
+.skipnote {
+  font-size:14.5px; color:var(--muted); background:var(--bg-card-2);
+  border:1px dashed var(--line-hi); border-radius:3px; padding:14px 16px;
+}
+
+.field { margin-bottom:18px; }
+.field label { display:block; font-size:14px; font-weight:700; margin-bottom:6px; }
+.field input, .field select, .field textarea {
+  width:100%; padding:12px 14px; border:1px solid var(--line-hi); border-radius:3px;
+  background:var(--bg-elev); font-family:var(--sans); font-size:16px; color:var(--cream);
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color:var(--orange); }
+.field textarea { min-height:96px; resize:vertical; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media (max-width:620px){ .grid2{grid-template-columns:1fr; gap:0} }
+
+.consent { display:flex; gap:11px; align-items:flex-start; font-size:14px; color:var(--muted); line-height:1.55; }
+.consent input { margin-top:4px; flex-shrink:0; width:16px; height:16px; }
+.consent a { color:var(--orange-ink); }
+
+/* ---------- botones ---------- */
+.nav-btns { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-top:24px; }
+.btn {
+  font-family:var(--sans); font-size:15px; font-weight:700; letter-spacing:.04em;
+  padding:14px 32px; border:none; border-radius:3px; cursor:pointer; transition:opacity .15s;
+  background:var(--orange); color:#fff;
+}
+.btn:hover { opacity:.88; }
+.btn.ghost { background:transparent; color:var(--muted); border:1px solid var(--line-hi); }
+.btn:disabled { opacity:.4; cursor:not-allowed; }
+.warnmsg { font-size:14px; color:var(--orange-ink); font-weight:600; display:none; margin-top:12px; }
+
+/* ============ RESULTADOS ============ */
+#s5 .card { padding:30px 32px; }
+@media (max-width:700px){ #s5 .card { padding:22px 20px; } }
+.rsection { font-family:var(--mono); font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--orange-ink); font-weight:500; margin:0 0 14px; display:flex; align-items:center; gap:10px; }
+.rsection::before { content:""; width:22px; height:2px; background:var(--orange); flex-shrink:0; }
+
+/* ---------- veredicto (lectura general, tipo semáforo) ---------- */
+.verdict {
+  border:1px solid var(--line-hi); border-radius:5px; margin-bottom:16px; overflow:hidden;
+  background:var(--bg-card-2); display:grid; grid-template-columns:110px 1fr;
+}
+.vbadge { display:flex; align-items:center; justify-content:center; color:#FBF6EA; }
+.vbadge svg { width:56px; height:56px; }
+.vbody { padding:28px 32px; }
+.verdict .vkicker { font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.verdict .vhead { font-family:var(--display); font-size:clamp(30px,5.6vw,44px); line-height:1.04; margin:7px 0 6px; }
+.verdict .vsub { font-size:15px; font-weight:700; letter-spacing:.01em; color:var(--muted); }
+.verdict .vdesc { font-size:16.5px; color:var(--cream-dim); line-height:1.5; margin-top:14px; max-width:54ch; }
+.v-calibrada .vbadge { background:var(--ok); }         .v-calibrada .vhead { color:var(--ok); }
+.v-sobre .vbadge     { background:var(--info); }        .v-sobre .vhead { color:var(--info); }
+.v-expuesta .vbadge  { background:var(--orange); }      .v-expuesta .vhead { color:var(--orange-ink); }
+.v-fuera .vbadge     { background:var(--orange-deep); } .v-fuera .vhead { color:var(--orange-deep); }
+@media (max-width:600px){ .verdict { grid-template-columns:1fr; } .vbadge { padding:20px 0; } .vbody { padding:20px 22px 24px; } }
+
+/* ---------- dos cifras + barras (entorno vs práctica) ---------- */
+.statgrid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+@media (max-width:600px){ .statgrid { grid-template-columns:1fr; } }
+.stat { border:1px solid var(--line); border-radius:5px; background:var(--bg-card); padding:20px 22px; }
+.stat .slabel { font-size:14px; font-weight:700; color:var(--cream-dim); }
+.stat .snum { font-family:var(--display); font-size:40px; line-height:1; margin:8px 0 14px; }
+.stat .snum i { font-size:20px; font-style:normal; color:var(--muted); }
+.stat.exig .snum { color:var(--cream-dim); }
+.stat.prac .snum { color:var(--orange-ink); }
+.stat .sbar { display:grid; grid-template-columns:repeat(4,1fr); gap:5px; }
+.stat .sbar i { height:14px; border-radius:3px; background:var(--line); display:block; }
+.stat.exig .sbar i.on { background:var(--cream-dim); }
+.stat.prac .sbar i.on { background:var(--orange); }
+.stat .sends { display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-top:6px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.08em; }
+
+/* ---------- perfil de las cinco capacidades ---------- */
+.pilgrid { display:flex; flex-direction:column; gap:12px; margin-top:4px; }
+.pilrow {
+  display:grid; grid-template-columns:52px 1fr; gap:16px; align-items:center;
+  padding:14px 16px; border:1px solid var(--line); border-radius:5px; background:var(--bg-card);
+}
+.pilrow .picon { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.pilrow .picon svg { width:26px; height:26px; }
+.pilrow .pmain { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.pilrow .ptop { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.pilrow .pname { font-size:17px; font-weight:800; }
+.pilrow .pband { font-size:13px; font-weight:700; letter-spacing:.02em; white-space:nowrap; }
+.pilrow .prail { height:9px; background:var(--line); border-radius:6px; overflow:hidden; }
+.pilrow .prail i { display:block; height:100%; border-radius:6px; }
+.pilrow .psub { font-size:13.5px; color:var(--muted); line-height:1.4; }
+.lv-alto  .picon { background:rgba(70,115,47,.14); color:var(--ok); }        .lv-alto  .pband { color:var(--ok); }        .lv-alto  .prail i { background:var(--ok); }
+.lv-medio .picon { background:rgba(154,84,17,.14); color:var(--warn); }      .lv-medio .pband { color:var(--warn); }      .lv-medio .prail i { background:var(--warn); }
+.lv-bajo  .picon { background:rgba(240,52,0,.14); color:var(--orange-ink); } .lv-bajo  .pband { color:var(--orange-ink); } .lv-bajo  .prail i { background:var(--orange); }
+.pillegend { display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; font-size:13px; color:var(--muted); }
+.pillegend span { display:flex; align-items:center; gap:7px; }
+.pillegend b { width:11px; height:11px; border-radius:3px; display:inline-block; }
+
+/* ---------- footer ---------- */
+footer.sitefoot {
+  max-width:800px; margin:56px auto 0; padding:22px 40px 0; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+}
+footer.sitefoot img { width:150px; height:auto; opacity:.85; }
+footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
+@media (max-width:700px){ footer.sitefoot { padding:22px 20px 0; } }
+
+.bar { height:10px; background:var(--line); border-radius:6px; overflow:hidden; margin-top:6px; }
+.bar span { display:block; height:100%; border-radius:6px; background:var(--orange); }
+.bar span.alt { background:var(--cream-dim); }
+.bar span.dim { background:var(--line-hi); }
+.metric { margin-bottom:17px; }
+.metric .mh { display:flex; justify-content:space-between; align-items:baseline; font-size:15px; }
+.metric .mh b { font-weight:700; }
+.metric .mh span { font-family:var(--mono); font-size:12.5px; color:var(--muted); }
+.metric .tag { font-weight:500; color:var(--orange-ink); font-size:12.5px; letter-spacing:.02em; }
+
+.callout {
+  display:grid; grid-template-columns:44px 1fr; gap:16px; align-items:start;
+  background:var(--bg-card-2); border:1px solid var(--line); border-radius:5px; padding:20px 22px; margin-top:14px;
+}
+.callout svg { width:30px; height:30px; color:var(--orange-ink); margin-top:2px; }
+.callout p { font-size:16px; line-height:1.5; }
+.callout .small { margin-top:8px; }
+
+.quotebox { border-left:4px solid var(--orange); padding:6px 0 6px 20px; margin:14px 0 0; font-size:18px; line-height:1.55; }
+.quotebox em { font-style:italic; color:var(--cream-dim); }
+.evidence { border-top:1px solid var(--line); margin-top:20px; padding-top:18px; font-size:15px; color:var(--cream-dim); line-height:1.55; }
+.evidence cite { font-style:normal; color:var(--muted); font-size:13px; display:block; margin-top:6px; }
+
+.gapitem { border-top:1px solid var(--line); padding-top:18px; margin-top:18px; }
+.gapitem:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+.gapitem h4 { font-size:16.5px; font-weight:800; margin-bottom:10px; }
+.gapitem dl { font-size:15.5px; line-height:1.55; }
+.gapitem dt { font-family:var(--mono); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:11px; }
+.gapitem dd { color:var(--cream-dim); }
+
+.sessiononly { border-left:3px solid var(--line-hi); }
+.sessionflag {
+  display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--info); border:1px solid var(--info);
+  border-radius:2px; padding:3px 9px; margin-bottom:14px;
+}
+
+.cta { background:var(--cream); color:var(--bg-card); border-radius:5px; padding:38px 34px; text-align:center; margin-top:24px; }
+.cta h2 { color:var(--bg-card); }
+.cta > p { font-size:16px; color:#CFC6B4; max-width:48ch; margin:0 auto 24px; line-height:1.5; }
+.cta .btn { background:var(--orange); font-size:16px; padding:15px 34px; }
+.ctafeat { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:26px 0 4px; text-align:left; }
+@media (max-width:600px){ .ctafeat { grid-template-columns:1fr; gap:14px; } }
+.ctafeat div { display:flex; gap:12px; align-items:flex-start; font-size:14px; color:#E4DAC4; line-height:1.4; }
+.ctafeat svg { width:22px; height:22px; flex-shrink:0; color:var(--orange); margin-top:1px; }
+.ctanote { font-size:13.5px; color:#A79E8C; margin-top:16px; }
+
+.method { font-size:14px; color:var(--muted); line-height:1.62; margin-top:24px; padding-top:20px; border-top:1px solid var(--line); }
+.hidden { display:none !important; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand"><img class="blogo" src="data:image/png;base64,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" alt="Memética"></div>
+  <div class="meta-right">Future Readiness</div>
+</nav>
+
+<div class="shell">
+
+<!-- ============ PORTADA ============ -->
+<section id="s0" class="hero">
+  <div class="eyebrow">Instrumento gratuito</div>
+  <h1>¿Qué tan preparada está su organización para un futuro incierto?</h1>
+  <p class="lede">Dieciocho preguntas para ubicar la relación entre lo que su entorno le exige y lo que su organización practica hoy. El resultado aparece en pantalla al terminar.</p>
+  <div class="facts">
+    <div><b>Duración</b>7 a 9 minutos</div>
+    <div><b>Responde</b>Una persona</div>
+    <div><b>Resultado</b>Inmediato en pantalla</div>
+    <div><b>Costo</b>Sin costo</div>
+  </div>
+  <div class="nav-btns"><span></span><button class="btn" onclick="go(1)">Comenzar</button></div>
+</section>
+
+<!-- ============ PASO 1 ============ -->
+<section id="s1" class="hidden">
+  <div class="stepmeta"><span class="mono">Paso 1 de 4</span><span class="mono">Sus datos</span></div>
+  <div class="progress"><span class="on"></span><span></span><span></span><span></span></div>
+
+  <div class="card">
+    <h2>Para preparar su lectura</h2>
+    <p class="small" style="margin-bottom:20px">Usamos estos datos para preparar su resultado y para contactarlo si usted lo autoriza.</p>
+    <div class="grid2">
+      <div class="field"><label for="f_nombre">Nombre y apellido</label><input type="text" id="f_nombre"></div>
+      <div class="field"><label for="f_email">Correo corporativo</label><input type="email" id="f_email"></div>
+      <div class="field"><label for="f_cargo">Cargo</label><input type="text" id="f_cargo"></div>
+      <div class="field"><label for="f_org">Organización</label><input type="text" id="f_org"></div>
+      <div class="field"><label for="f_rubro">Rubro</label><select id="f_rubro">
+        <option value="">Seleccionar</option><option>Minería y recursos</option><option>Energía</option>
+        <option>Banca y servicios financieros</option><option>Salud</option><option>Educación</option>
+        <option>Retail y consumo</option><option>Industria y manufactura</option><option>Construcción e inmobiliario</option>
+        <option>Agro y alimentos</option><option>Tecnología</option><option>Servicios profesionales</option>
+        <option>Sector público</option><option>Gremio, fundación u ONG</option><option>Otro</option></select></div>
+      <div class="field"><label for="f_tam">Número de personas que trabajan en la organización</label><select id="f_tam">
+        <option value="">Seleccionar</option><option>Menos de 50</option><option>50 a 199</option>
+        <option>200 a 999</option><option>1.000 o más</option></select></div>
+    </div>
+    <div class="field"><label for="f_fact">Facturación anual aproximada <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><select id="f_fact">
+      <option value="">Prefiero no responder</option><option>Menos de USD 1 millón</option><option>USD 1 a 10 millones</option>
+      <option>USD 10 a 50 millones</option><option>USD 50 a 200 millones</option><option>Más de USD 200 millones</option></select></div>
+    <div class="consent">
+      <input type="checkbox" id="f_consent">
+      <label for="f_consent" style="font-weight:400;font-size:12.5px">Autorizo a Memética el tratamiento de mis datos para preparar el resultado de esta lectura y contactarme. No se comparten con terceros con fines comerciales. El detalle de qué datos recogemos, por cuánto tiempo y cómo ejercer sus derechos está en la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>, que se abre en una pestaña nueva sin perder sus respuestas.</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q">
+      <div class="qnum">01</div>
+      <div class="qtext">Pensando en los próximos diez años, ¿qué tan preparada diría que está su organización para enfrentar cambios relevantes en su entorno?</div>
+      <div class="qhint">Responda con lo primero que piense. Volveremos sobre esto al final.</div>
+      <div class="likert" data-q="p1">
+        <label class="opt"><input type="radio" name="p1" value="1"><span class="dot">1</span><span>Nada preparada</span></label>
+        <label class="opt"><input type="radio" name="p1" value="2"><span class="dot">2</span><span>Poco</span></label>
+        <label class="opt"><input type="radio" name="p1" value="3"><span class="dot">3</span><span>Medianamente</span></label>
+        <label class="opt"><input type="radio" name="p1" value="4"><span class="dot">4</span><span>Bastante</span></label>
+        <label class="opt"><input type="radio" name="p1" value="5"><span class="dot">5</span><span>Muy preparada</span></label>
+      </div>
+    </div>
+  </div>
+  <div class="warnmsg" id="w1">Faltan datos por completar en este paso.</div>
+  <div class="nav-btns"><button class="btn ghost" onclick="go(0)">Atrás</button><button class="btn" onclick="next(1)">Continuar</button></div>
+</section>
+
+<!-- ============ PASO 2 ============ -->
+<section id="s2" class="hidden">
+  <div class="stepmeta"><span class="mono">Paso 2 de 4</span><span class="mono">Su entorno</span></div>
+  <div class="progress"><span class="on"></span><span class="on"></span><span></span><span></span></div>
+
+  <div class="card">
+    <h2>La exigencia de su entorno</h2>
+    <p class="small" style="margin-bottom:24px">Cuatro preguntas sobre el terreno en que opera su organización. No hay respuestas mejores ni peores: un entorno estable exige prácticas distintas a uno turbulento.</p>
+
+    <div class="q">
+      <div class="qnum">02 · Complejidad</div>
+      <div class="qtext">¿Cuántos actores distintos influyen hoy en el resultado de su negocio (competidores, clientes, proveedores, reguladores, comunidades)?</div>
+      <div class="opts" data-q="p2">
+        <label class="opt"><input type="radio" name="p2" value="1"><span class="dot">1</span><span>Pocos y conocidos</span></label>
+        <label class="opt"><input type="radio" name="p2" value="2"><span class="dot">2</span><span>Varios, todos identificables</span></label>
+        <label class="opt"><input type="radio" name="p2" value="3"><span class="dot">3</span><span>Bastantes, con algunos nuevos</span></label>
+        <label class="opt"><input type="radio" name="p2" value="4"><span class="dot">4</span><span>Muchos, y cambian de rol</span></label>
+        <label class="opt"><input type="radio" name="p2" value="5"><span class="dot">5</span><span>Muchos, y aparecen actores nuevos con frecuencia</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">03 · Complejidad</div>
+      <div class="qtext">¿Qué tan difícil resulta anticipar lo que van a hacer esos actores?</div>
+      <div class="opts" data-q="p3">
+        <label class="opt"><input type="radio" name="p3" value="1"><span class="dot">1</span><span>Sus movimientos son bastante previsibles</span></label>
+        <label class="opt"><input type="radio" name="p3" value="2"><span class="dot">2</span><span>En general los anticipamos</span></label>
+        <label class="opt"><input type="radio" name="p3" value="3"><span class="dot">3</span><span>A veces nos sorprenden</span></label>
+        <label class="opt"><input type="radio" name="p3" value="4"><span class="dot">4</span><span>Nos sorprenden seguido</span></label>
+        <label class="opt"><input type="radio" name="p3" value="5"><span class="dot">5</span><span>Rara vez logramos anticiparlos</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">04 · Volatilidad</div>
+      <div class="qtext">En los últimos tres años, ¿cuánto afectaron a su organización cambios que no dependían de ella (regulación, tecnología, mercado, clima social)?</div>
+      <div class="opts" data-q="p4">
+        <label class="opt"><input type="radio" name="p4" value="1"><span class="dot">1</span><span>Casi nada</span></label>
+        <label class="opt"><input type="radio" name="p4" value="2"><span class="dot">2</span><span>Algo, en aspectos menores</span></label>
+        <label class="opt"><input type="radio" name="p4" value="3"><span class="dot">3</span><span>Afectaron algunas operaciones</span></label>
+        <label class="opt"><input type="radio" name="p4" value="4"><span class="dot">4</span><span>Obligaron a ajustar el plan</span></label>
+        <label class="opt"><input type="radio" name="p4" value="5"><span class="dot">5</span><span>Cambiaron condiciones centrales del negocio</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">05 · Volatilidad</div>
+      <div class="qtext">¿Qué tan difícil resulta anticipar la evolución de los factores que más podrían transformar su sector en los próximos años (tecnología, regulación, nuevos modelos de negocio, cambios sociales)?</div>
+      <div class="opts" data-q="p5">
+        <label class="opt"><input type="radio" name="p5" value="1"><span class="dot">1</span><span>Bastante predecible</span></label>
+        <label class="opt"><input type="radio" name="p5" value="2"><span class="dot">2</span><span>Predecible con márgenes manejables</span></label>
+        <label class="opt"><input type="radio" name="p5" value="3"><span class="dot">3</span><span>Existen dudas relevantes</span></label>
+        <label class="opt"><input type="radio" name="p5" value="4"><span class="dot">4</span><span>Difícil de anticipar</span></label>
+        <label class="opt"><input type="radio" name="p5" value="5"><span class="dot">5</span><span>Muy difícil de anticipar</span></label>
+      </div>
+    </div>
+  </div>
+  <div class="warnmsg" id="w2">Faltan preguntas por responder en este paso.</div>
+  <div class="nav-btns"><button class="btn ghost" onclick="go(1)">Atrás</button><button class="btn" onclick="next(2)">Continuar</button></div>
+</section>
+
+<!-- ============ PASO 3 ============ -->
+<section id="s3" class="hidden">
+  <div class="stepmeta"><span class="mono">Paso 3 de 4</span><span class="mono">Lo que su organización practica</span></div>
+  <div class="progress"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
+
+  <div class="card">
+    <div class="pillarhead">Percibir</div>
+    <div class="pillarsub">Buscar y dar significado a los cambios que podrían importar.</div>
+
+    <div class="q">
+      <div class="qnum">06</div>
+      <div class="qtext">¿Con qué sistematicidad su organización busca señales de cambios que podrían afectar su futuro?</div>
+      <div class="opts" data-q="p6">
+        <label class="opt"><input type="radio" name="p6" value="1"><span class="dot">1</span><span>No las buscamos de forma sistemática; trabajamos con la información que llega</span></label>
+        <label class="opt"><input type="radio" name="p6" value="2"><span class="dot">2</span><span>Seguimos principalmente información de nuestra propia industria</span></label>
+        <label class="opt"><input type="radio" name="p6" value="3"><span class="dot">3</span><span>Revisamos periódicamente tendencias y cambios relevantes</span></label>
+        <label class="opt"><input type="radio" name="p6" value="4"><span class="dot">4</span><span>Hacemos una búsqueda sistemática que incluye fuentes y cambios de fuera de nuestro sector</span></label>
+        <label class="opt"><input type="radio" name="p6" value="5"><span class="dot">5</span><span>Tenemos una práctica sistemática de búsqueda, registro y revisión de señales y cambios emergentes</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">07</div>
+      <div class="qtext">Cuando se detecta una señal o cambio que podría ser relevante para la organización, ¿qué ocurre normalmente?</div>
+      <div class="opts" data-q="p7">
+        <label class="opt"><input type="radio" name="p7" value="1"><span class="dot">1</span><span>Generalmente no hay una instancia donde analizarlo</span></label>
+        <label class="opt"><input type="radio" name="p7" value="2"><span class="dot">2</span><span>Se comenta de manera informal entre algunas personas</span></label>
+        <label class="opt"><input type="radio" name="p7" value="3"><span class="dot">3</span><span>En algunos casos se analiza en reuniones o instancias existentes</span></label>
+        <label class="opt"><input type="radio" name="p7" value="4"><span class="dot">4</span><span>Existe una instancia definida para interpretar sus posibles implicancias</span></label>
+        <label class="opt"><input type="radio" name="p7" value="5"><span class="dot">5</span><span>Se analiza de forma sistemática, se conecta con otras señales, y sus implicancias alimentan decisiones estratégicas</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="pillarhead">Anticipar</div>
+    <div class="pillarsub">Explorar futuros alternativos y revisar los supuestos desde los que se decide.</div>
+
+    <div class="q">
+      <div class="qnum">08</div>
+      <div class="qtext">¿Con cuántos futuros o escenarios alternativos trabaja hoy su planificación estratégica?</div>
+      <div class="opts" data-q="p8">
+        <label class="opt"><input type="radio" name="p8" value="1"><span class="dot">1</span><span>Con ninguno explícito</span></label>
+        <label class="opt"><input type="radio" name="p8" value="2"><span class="dot">2</span><span>Con uno: que las cosas continúen aproximadamente como hoy</span></label>
+        <label class="opt"><input type="radio" name="p8" value="3"><span class="dot">3</span><span>Con uno principal y un escenario de contingencia</span></label>
+        <label class="opt"><input type="radio" name="p8" value="4"><span class="dot">4</span><span>Con varios escenarios significativamente distintos entre sí</span></label>
+        <label class="opt"><input type="radio" name="p8" value="5"><span class="dot">5</span><span>Con varios escenarios, y con decisiones asociadas a cómo estos podrían evolucionar</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">09</div>
+      <div class="qtext">¿Con qué frecuencia se cuestionan de forma explícita los supuestos sobre los que descansa la estrategia o el plan?</div>
+      <div class="opts" data-q="p9">
+        <label class="opt"><input type="radio" name="p9" value="1"><span class="dot">1</span><span>No ocurre</span></label>
+        <label class="opt"><input type="radio" name="p9" value="2"><span class="dot">2</span><span>Principalmente cuando algo sale mal</span></label>
+        <label class="opt"><input type="radio" name="p9" value="3"><span class="dot">3</span><span>Durante la planificación anual</span></label>
+        <label class="opt"><input type="radio" name="p9" value="4"><span class="dot">4</span><span>En instancias definidas y sistemáticas</span></label>
+        <label class="opt"><input type="radio" name="p9" value="5"><span class="dot">5</span><span>De forma sistemática, y esa revisión ha modificado decisiones concretas</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="pillarhead">Integrar</div>
+    <div class="pillarsub">Que la lectura de futuro llegue a la decisión.</div>
+
+    <div class="q">
+      <div class="qnum">10</div>
+      <div class="qtext">En los últimos 12 meses, ¿cuántas decisiones relevantes (inversión, portafolio, estructura, alianzas) cambiaron de rumbo a partir de una lectura de futuro?</div>
+      <div class="opts" data-q="p10">
+        <label class="opt"><input type="radio" name="p10" value="1"><span class="dot">1</span><span>Ninguna</span></label>
+        <label class="opt"><input type="radio" name="p10" value="2"><span class="dot">2</span><span>Se conversó, sin cambio de decisión</span></label>
+        <label class="opt"><input type="radio" name="p10" value="3"><span class="dot">3</span><span>Una</span></label>
+        <label class="opt"><input type="radio" name="p10" value="4"><span class="dot">4</span><span>Dos o tres</span></label>
+        <label class="opt"><input type="radio" name="p10" value="5"><span class="dot">5</span><span>Varias, y las podemos nombrar con fecha</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">11</div>
+      <div class="qtext">¿En qué medida las decisiones estratégicas relevantes consideran de forma explícita señales, escenarios o supuestos sobre el futuro?</div>
+      <div class="opts" data-q="p11">
+        <label class="opt"><input type="radio" name="p11" value="1"><span class="dot">1</span><span>No los consideran de forma explícita</span></label>
+        <label class="opt"><input type="radio" name="p11" value="2"><span class="dot">2</span><span>Ocurre de manera excepcional y depende de algunas personas</span></label>
+        <label class="opt"><input type="radio" name="p11" value="3"><span class="dot">3</span><span>Se consideran en algunas decisiones importantes</span></label>
+        <label class="opt"><input type="radio" name="p11" value="4"><span class="dot">4</span><span>Se incorporan de forma sistemática en las principales decisiones estratégicas</span></label>
+        <label class="opt"><input type="radio" name="p11" value="5"><span class="dot">5</span><span>Forman parte habitual de los criterios con que se evalúan decisiones, inversiones y prioridades</span></label>
+      </div>
+    </div>
+  </div>
+  <div class="warnmsg" id="w3">Faltan preguntas por responder en este paso.</div>
+  <div class="nav-btns"><button class="btn ghost" onclick="go(2)">Atrás</button><button class="btn" onclick="next(3)">Continuar</button></div>
+</section>
+
+<!-- ============ PASO 4 ============ -->
+<section id="s4" class="hidden">
+  <div class="stepmeta"><span class="mono">Paso 4 de 4</span><span class="mono">Experimentar, aprender y usted</span></div>
+  <div class="progress"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+
+  <div class="card">
+    <div class="pillarhead">Experimentar</div>
+    <div class="pillarsub">Actuar de forma acotada para averiguar lo que no se sabe.</div>
+
+    <div class="q">
+      <div class="qnum">12</div>
+      <div class="qtext">¿Su organización realiza pruebas de bajo costo (pilotos, prototipos o experimentos) para aprender frente a oportunidades o cambios sobre los que existe incertidumbre?</div>
+      <div class="opts" data-q="p12">
+        <label class="opt"><input type="radio" name="p12" value="1"><span class="dot">1</span><span>No</span></label>
+        <label class="opt"><input type="radio" name="p12" value="2"><span class="dot">2</span><span>De forma ocasional y sin un método definido</span></label>
+        <label class="opt"><input type="radio" name="p12" value="3"><span class="dot">3</span><span>Sí, principalmente dentro de algunas áreas</span></label>
+        <label class="opt"><input type="radio" name="p12" value="4"><span class="dot">4</span><span>Sí, de manera sistemática y con recursos asignados</span></label>
+        <label class="opt"><input type="radio" name="p12" value="5"><span class="dot">5</span><span>Sí, como práctica habitual para aprender antes de tomar decisiones o realizar apuestas mayores</span></label>
+      </div>
+    </div>
+
+    <div class="q" id="q13">
+      <div class="qnum">13</div>
+      <div class="qtext">Cuando la organización experimenta o realiza un piloto, ¿qué tan definidos están de antemano qué se quiere aprender y los criterios para decidir si continuar, modificar o detener la iniciativa?</div>
+      <div class="opts" data-q="p13">
+        <label class="opt"><input type="radio" name="p13" value="1"><span class="dot">1</span><span>Normalmente no se definen</span></label>
+        <label class="opt"><input type="radio" name="p13" value="2"><span class="dot">2</span><span>Se definen de manera informal</span></label>
+        <label class="opt"><input type="radio" name="p13" value="3"><span class="dot">3</span><span>Se definen en algunos experimentos</span></label>
+        <label class="opt"><input type="radio" name="p13" value="4"><span class="dot">4</span><span>Se definen de forma explícita en la mayoría de los casos</span></label>
+        <label class="opt"><input type="radio" name="p13" value="5"><span class="dot">5</span><span>Son parte sistemática del diseño de los experimentos y de las decisiones posteriores</span></label>
+      </div>
+    </div>
+    <div class="q hidden" id="q13skip">
+      <div class="skipnote">La pregunta siguiente no aplica en su caso, porque su organización todavía no realiza este tipo de pruebas.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="pillarhead">Aprender y adaptarse</div>
+    <div class="pillarsub">Convertir la sorpresa y el error en cambio.</div>
+
+    <div class="q">
+      <div class="qnum">14</div>
+      <div class="qtext">Cuando ocurre algo significativamente distinto de lo esperado, ¿qué tan sistemáticamente la organización revisa qué supuestos fallaron y qué puede aprender de ello?</div>
+      <div class="opts" data-q="p14">
+        <label class="opt"><input type="radio" name="p14" value="1"><span class="dot">1</span><span>No suele hacerlo</span></label>
+        <label class="opt"><input type="radio" name="p14" value="2"><span class="dot">2</span><span>Se conversa de manera informal</span></label>
+        <label class="opt"><input type="radio" name="p14" value="3"><span class="dot">3</span><span>Ocurre en algunos casos</span></label>
+        <label class="opt"><input type="radio" name="p14" value="4"><span class="dot">4</span><span>Existe una práctica definida para hacerlo</span></label>
+        <label class="opt"><input type="radio" name="p14" value="5"><span class="dot">5</span><span>Se hace de forma sistemática, y el aprendizaje queda disponible para decisiones futuras</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">15</div>
+      <div class="qtext">¿Con qué frecuencia los aprendizajes provenientes de errores, sorpresas o experimentos se traducen en cambios concretos en decisiones, estrategias o formas de trabajar?</div>
+      <div class="opts" data-q="p15">
+        <label class="opt"><input type="radio" name="p15" value="1"><span class="dot">1</span><span>Prácticamente nunca</span></label>
+        <label class="opt"><input type="radio" name="p15" value="2"><span class="dot">2</span><span>De manera ocasional</span></label>
+        <label class="opt"><input type="radio" name="p15" value="3"><span class="dot">3</span><span>En algunos casos</span></label>
+        <label class="opt"><input type="radio" name="p15" value="4"><span class="dot">4</span><span>Con frecuencia</span></label>
+        <label class="opt"><input type="radio" name="p15" value="5"><span class="dot">5</span><span>De forma sistemática; podemos identificar decisiones o prácticas que han cambiado a partir de esos aprendizajes</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="pillarhead">Cómo mira usted el futuro</div>
+    <div class="pillarsub">Dos preguntas sobre usted, no sobre su organización. No entran en el puntaje.</div>
+
+    <div class="q">
+      <div class="qnum">16 · Agencia</div>
+      <div class="qtext">Con lo que hago puedo influir en cómo será el futuro de mi organización.</div>
+      <div class="likert" data-q="p16">
+        <label class="opt"><input type="radio" name="p16" value="1"><span class="dot">1</span><span>Muy en desacuerdo</span></label>
+        <label class="opt"><input type="radio" name="p16" value="2"><span class="dot">2</span><span>En desacuerdo</span></label>
+        <label class="opt"><input type="radio" name="p16" value="3"><span class="dot">3</span><span>Neutral</span></label>
+        <label class="opt"><input type="radio" name="p16" value="4"><span class="dot">4</span><span>De acuerdo</span></label>
+        <label class="opt"><input type="radio" name="p16" value="5"><span class="dot">5</span><span>Muy de acuerdo</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="qnum">17 · Expectativa</div>
+      <div class="qtext">Creo que a mi organización le espera un futuro mejor que su presente.</div>
+      <div class="likert" data-q="p17">
+        <label class="opt"><input type="radio" name="p17" value="1"><span class="dot">1</span><span>Muy en desacuerdo</span></label>
+        <label class="opt"><input type="radio" name="p17" value="2"><span class="dot">2</span><span>En desacuerdo</span></label>
+        <label class="opt"><input type="radio" name="p17" value="3"><span class="dot">3</span><span>Neutral</span></label>
+        <label class="opt"><input type="radio" name="p17" value="4"><span class="dot">4</span><span>De acuerdo</span></label>
+        <label class="opt"><input type="radio" name="p17" value="5"><span class="dot">5</span><span>Muy de acuerdo</span></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q">
+      <div class="qnum">18 · Última pregunta</div>
+      <div class="qtext">¿Qué cambio de los últimos tres años tomó por sorpresa a su organización?</div>
+      <div class="field"><textarea id="p18" placeholder="Una o dos líneas bastan."></textarea></div>
+    </div>
+  </div>
+  <div class="warnmsg" id="w4">Faltan preguntas por responder en este paso.</div>
+  <div class="nav-btns"><button class="btn ghost" onclick="go(3)">Atrás</button><button class="btn" onclick="next(4)">Ver mi resultado</button></div>
+</section>
+
+<!-- ============ RESULTADOS ============ -->
+<section id="s5" class="hidden">
+  <div class="eyebrow">Su resultado</div>
+  <div id="r_state"></div>
+  <div id="r_pilf"></div>
+  <div id="r_weak"></div>
+  <div id="r_prior"></div>
+  <div id="r_quote"></div>
+  <div id="r_evidence"></div>
+
+  <!-- bloques reservados para la sesión de lectura -->
+  <div id="r_pillars"></div>
+  <div id="r_gaps"></div>
+  <div id="r_person"></div>
+
+  <div class="cta">
+    <h2>Conversemos sobre sus resultados</h2>
+    <p>Una sesión de lectura de resultados de 45 minutos para revisar en detalle su diagnóstico, las brechas que importan para su contexto y las líneas de acción posibles.</p>
+    <div class="ctafeat" id="r_ctafeat"></div>
+    <button class="btn" onclick="location.href='mailto:contacto@memetica.cl?subject='+encodeURIComponent('Sesión de lectura de resultados · Future Readiness')">Agendar la sesión · 45 minutos</button>
+    <p class="ctanote">Sin costo y sin compromiso. Coordinamos día y hora por correo.</p>
+  </div>
+
+  <div class="method" id="r_method"></div>
+</section>
+
+</div>
+
+<footer class="sitefoot">
+  <img id="flogo" alt="Memética">
+  <p class="small">Future Readiness es un instrumento de autopercepción, orientativo. No sustituye una evaluación con evidencia. Responsable del tratamiento de datos: Futures Evolution Ltda. · <a href="privacidad.html" target="_blank" rel="noopener" style="color:var(--orange-ink)">Política de privacidad</a></p>
+</footer>
+
+<script>
+/* ============================================================
+   MOTOR DE CÁLCULO · v2
+   Exigencia = MAX(complejidad, volatilidad)      · Rohrbeck y Kum (2018)
+   Práctica  = PROMEDIO de los cinco pilares
+   Eslabón débil = pilar de menor puntaje (nombra, no decide el estado)
+   ============================================================ */
+const A = {};
+let paso = 0;
+let leadEnviado = false;
+
+/* El reporte de sesión (perfil con puntaje, brechas, contraste personal) se reserva
+   para la sesión de lectura de resultados. En pantalla siempre se muestra la vista pública. */
+const VISTA = 'publica';
+
+/* Cifra externa de Rohrbeck y Kum (2018) en el reporte. */
+const MOSTRAR_CIFRA_EXTERNA = true;
+
+/* URL /exec de la implementación de Apps Script que registra la respuesta y avisa del lead. */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwb-4pUwFHfIvFqZw4tBEEojl5DfwsZn5tGF2hoQiYxallPsVcQ4Ww1FaNXlsVim5VVOg/exec";
+
+const SEM_TXT = { acoplada:'Calibrada', sobre:'Preparación por delante', expuesta:'Brecha relevante', fuera:'Brecha amplia' };
+const SEM_CLS = { acoplada:'v-calibrada', sobre:'v-sobre', expuesta:'v-expuesta', fuera:'v-fuera' };
+
+const val    = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+const round1 = x => Math.round(x * 10) / 10;
+
+document.querySelectorAll('.opt input').forEach(inp => {
+  inp.addEventListener('change', e => {
+    const name = e.target.name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(o => o.closest('.opt').classList.remove('sel'));
+    e.target.closest('.opt').classList.add('sel');
+    A[name] = parseInt(e.target.value);
+    if (name === 'p12') rutaP13();
+  });
+});
+
+/* ruta condicional: quien no experimenta no puede responder P13 */
+function rutaP13(){
+  const noAplica = A.p12 === 1;
+  document.getElementById('q13').classList.toggle('hidden', noAplica);
+  document.getElementById('q13skip').classList.toggle('hidden', !noAplica);
+  if (noAplica) {
+    delete A.p13;
+    document.querySelectorAll('input[name="p13"]').forEach(o => { o.checked = false; o.closest('.opt').classList.remove('sel'); });
+  }
+}
+
+function go(n){
+  for (let i=0;i<=5;i++){ const el=document.getElementById('s'+i); if(el) el.classList.add('hidden'); }
+  document.getElementById('s'+n).classList.remove('hidden');
+  paso = n;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+const REQ = {
+  1:['p1'],
+  2:['p2','p3','p4','p5'],
+  3:['p6','p7','p8','p9','p10','p11'],
+  4:['p12','p14','p15','p16','p17']
+};
+
+function next(n){
+  const req = REQ[n].slice();
+  if (n === 4 && A.p12 !== 1) req.push('p13');
+  const faltan = req.filter(k => !A[k]);
+  const w = document.getElementById('w'+n);
+  if (n===1 && (!document.getElementById('f_nombre').value || !document.getElementById('f_email').value || !document.getElementById('f_consent').checked)) faltan.push('datos');
+  if (faltan.length){ w.style.display='block'; return; }
+  w.style.display='none';
+  if (n===4){ render(); go(5); enviarLead(); } else { go(n+1); }
+}
+
+/* ============================================================
+   ENVÍO DEL LEAD · registra la respuesta y avisa por correo
+   El resultado en pantalla se calcula en el navegador y no
+   depende de esta llamada. Si falla, la persona igual ve su
+   resultado; se pierde solo el registro.
+   ============================================================ */
+function enviarLead(){
+  if (leadEnviado) return;
+  if (!SHEET_URL){ console.log('[FR] SHEET_URL vacío: modo local, no se registra el lead.'); return; }
+  leadEnviado = true;
+
+  const cx = prom(['p2','p3']), vl = prom(['p4','p5']);
+  const exigencia = Math.max(cx, vl);
+  const expKeys = (A.p12 === 1) ? ['p12'] : ['p12','p13'];
+  const P = {
+    Percibir: prom(['p6','p7']), Anticipar: prom(['p8','p9']), Integrar: prom(['p10','p11']),
+    Experimentar: prom(expKeys), 'Aprender y adaptarse': prom(['p14','p15'])
+  };
+  const practica = Object.values(P).reduce((s,v)=>s+v,0) / 5;
+  const minVal = Math.min(...Object.values(P));
+  const debil = Object.keys(P).find(k => P[k] === minVal);
+  const nE = nivel(exigencia), nP = nivel(practica), d = nP - nE;
+  const key = d === 0 ? 'acoplada' : d > 0 ? 'sobre' : d === -1 ? 'expuesta' : 'fuera';
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    nombre: val('f_nombre'), email: val('f_email'), cargo: val('f_cargo'), organizacion: val('f_org'),
+    rubro: val('f_rubro'), tamano: val('f_tam'), facturacion: val('f_fact'),
+    p1: A.p1,
+    exigencia_nivel: nE, practica_nivel: nP,
+    estado: ESTADOS[key].name, semaforo: SEM_TXT[key], pilar_debil: debil,
+    exigencia: round1(exigencia), practica: round1(practica),
+    percibir: round1(P.Percibir), anticipar: round1(P.Anticipar), integrar: round1(P.Integrar),
+    experimentar: round1(P.Experimentar), aprender: round1(P['Aprender y adaptarse']),
+    agencia: A.p16, expectativa: A.p17,
+    sorpresa: val('p18'),
+    respuestas: JSON.stringify(A)
+  };
+
+  fetch(SHEET_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  }).then(() => console.log('[FR] lead registrado'))
+    .catch(e => { leadEnviado = false; console.log('[FR] error al registrar el lead:', e); });
+}
+
+const nivel = x => x < 2 ? 1 : x < 3 ? 2 : x < 4 ? 3 : 4;
+const pct   = x => Math.round((x - 1) / 4 * 100);
+const prom  = ks => ks.reduce((s,k)=>s+A[k],0) / ks.length;
+const dec   = x => x.toFixed(1).replace('.', ',');
+
+const ESTADOS = {
+  acoplada: { cls:'st-acoplada', name:'Acoplada', rank:4,
+    desc:'Lo que su organización practica corresponde a lo que su entorno le exige hoy. La tarea es sostenerlo cuando la exigencia cambie.' },
+  sobre: { cls:'st-sobre', name:'Sobre-equipada', rank:3,
+    desc:'Su organización practica más de lo que su entorno le pide hoy. Conviene revisar que ese esfuerzo esté llegando a decisiones, porque el análisis que no llega a la decisión tiene costo propio.' },
+  expuesta: { cls:'st-expuesta', name:'Expuesta', rank:2,
+    desc:'Sus prácticas quedan un nivel por debajo de lo que el entorno le exige. La distancia es recuperable y conviene atenderla antes de que el entorno se mueva otra vez.' },
+  fuera: { cls:'st-fuera', name:'Fuera de fase', rank:1,
+    desc:'Sus prácticas quedan dos o más niveles por debajo de lo que el entorno le exige. La organización está resolviendo con los instrumentos de un terreno que ya cambió.' }
+};
+
+/* lecturas por pilar · fuente: 07_MATRIZ_INTERPRETACION.md */
+const LECTURAS = {
+  Percibir: {
+    sub:'Buscar y dar significado a los cambios que podrían importar',
+    senala:'La percepción depende de información conocida y próxima al negocio actual.',
+    riesgo:'Reconocer un cambio cuando ya es evidente reduce el tiempo disponible para comprenderlo, preparar respuesta o capturar la oportunidad.',
+    capacidad:'Rastreo con método, registro de señales e interpretación colectiva.'
+  },
+  Anticipar: {
+    sub:'Explorar futuros alternativos y revisar los supuestos desde los que se decide',
+    senala:'La planificación puede estar apoyada en un futuro implícitamente único, sin haberlo declarado como supuesto.',
+    riesgo:'Si ese futuro no ocurre, muchas decisiones pierden su fundamento al mismo tiempo. Los modelos mentales quedan obsoletos antes que los planes.',
+    capacidad:'Construcción y uso de escenarios, y revisión explícita de supuestos.'
+  },
+  Integrar: {
+    sub:'Que la lectura de futuro llegue a la decisión',
+    senala:'Puede existir información y análisis de futuro con poca incidencia sobre la estrategia real.',
+    riesgo:'El trabajo de futuro se vuelve una actividad periférica, desconectada del presupuesto y de las prioridades. Cuando llega una restricción, es lo primero que se corta.',
+    capacidad:'Vínculo entre anticipación y decisión, y gobernanza de ese vínculo.'
+  },
+  Experimentar: {
+    sub:'Actuar de forma acotada para averiguar lo que no se sabe',
+    senala:'La organización intenta resolver la incertidumbre solo con análisis, en un terreno donde parte de lo que necesita saber aparece únicamente al actuar.',
+    riesgo:'Esperar más conocimiento retrasa la acción; comprometerse directamente a gran escala encarece el error.',
+    capacidad:'Apuestas acotadas con criterio de aprendizaje definido de antemano.'
+  },
+  'Aprender y adaptarse': {
+    sub:'Convertir la sorpresa y el error en cambio',
+    senala:'La organización corrige problemas operativos sin revisar las interpretaciones que hicieron posible la sorpresa.',
+    riesgo:'Se resuelven síntomas repetidos mientras permanece intacto el modelo que produce la vulnerabilidad, y la misma clase de sorpresa vuelve con otra cara.',
+    capacidad:'Revisión de supuestos después del hecho, y traducción del aprendizaje en decisión.'
+  }
+};
+
+/* iconos inline (24x24, trazo currentColor) */
+const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICON = {
+  acoplada: svg('<circle cx="12" cy="12" r="9.2"/><path d="M8 12.5l2.6 2.5L16 9.5"/>'),
+  sobre:     svg('<path d="M12 3l7 3v5.5c0 4.2-2.9 7.3-7 9-4.1-1.7-7-4.8-7-9V6z"/><path d="M9 12l2 2 4-4.5"/>'),
+  expuesta:  svg('<circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.4" r="1.15" fill="currentColor" stroke="none"/>'),
+  fuera:     svg('<path d="M12 3.5l9.3 16H2.7z"/><path d="M12 9.5v4.5"/><circle cx="12" cy="16.8" r="1.05" fill="currentColor" stroke="none"/>'),
+  Percibir:            svg('<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3.2"/><path d="M12 12l7-4"/>'),
+  Anticipar:          svg('<path d="M7 6h3l1.2 3.4M17 6h-3l-1.2 3.4"/><circle cx="6.7" cy="15" r="3.6"/><circle cx="17.3" cy="15" r="3.6"/><path d="M10.3 15h3.4"/>'),
+  Integrar:          svg('<path d="M10 8a4 4 0 1 0 0 8"/><path d="M14 16a4 4 0 1 0 0-8"/><path d="M8.5 12h7"/>'),
+  Experimentar:      svg('<path d="M9.5 3h5M10.5 3v6l-5 9a1.9 1.9 0 0 0 1.7 2.9h9.6a1.9 1.9 0 0 0 1.7-2.9l-5-9V3"/><path d="M8 15.5h8"/>'),
+  'Aprender y adaptarse': svg('<path d="M4.5 12a7.5 7.5 0 0 1 12.4-5.6l1.9 1.8M19.5 12a7.5 7.5 0 0 1-12.4 5.6l-1.9-1.8"/><path d="M18.8 4.4v4h-4M5.2 19.6v-4h4"/>'),
+  brechas:  svg('<circle cx="10.5" cy="10.5" r="6"/><path d="M19.5 19.5l-4.7-4.7"/>'),
+  prior:    svg('<path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/>'),
+  quote:    svg('<path d="M9 7H6a3 3 0 0 0-3 3v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2"/><path d="M20 7h-3a3 3 0 0 0-3 3v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2"/>'),
+  featDoc:  svg('<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5M10 13h5M10 17h5"/>'),
+  featRisk: svg('<path d="M4 20V4M4 20h16"/><path d="M8 15l3-4 3 2 4-6"/>'),
+  featPath: svg('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 5.3L8 16l2.3-5.3z"/>')
+};
+
+function render(){
+  /* ---- exigencia ---- */
+  const complejidad = prom(['p2','p3']), volatilidad = prom(['p4','p5']);
+  const exigencia = Math.max(complejidad, volatilidad);
+
+  /* ---- los cinco pilares ---- */
+  const expKeys = (A.p12 === 1) ? ['p12'] : ['p12','p13'];
+  const pilares = [
+    ['Percibir',            prom(['p6','p7'])],
+    ['Anticipar',           prom(['p8','p9'])],
+    ['Integrar',            prom(['p10','p11'])],
+    ['Experimentar',        prom(expKeys)],
+    ['Aprender y adaptarse',prom(['p14','p15'])]
+  ];
+  const practica = pilares.reduce((s,p)=>s+p[1],0) / pilares.length;
+  const minVal   = Math.min(...pilares.map(p=>p[1]));
+  const debiles  = pilares.filter(p => p[1] === minVal);
+
+  const nE = nivel(exigencia), nP = nivel(practica), d = nP - nE;
+  const key = d === 0 ? 'acoplada' : d > 0 ? 'sobre' : d === -1 ? 'expuesta' : 'fuera';
+  const E = ESTADOS[key];
+  const completa = VISTA === 'completa';
+
+  /* ---- 1. la lectura general (semáforo) ---- */
+  document.getElementById('r_state').innerHTML = `
+    <div class="verdict ${SEM_CLS[key]}">
+      <div class="vbadge">${ICON[key]}</div>
+      <div class="vbody">
+        <div class="vkicker">Su nivel de Future Readiness</div>
+        <div class="vhead">${SEM_TXT[key]}</div>
+        <div class="vsub">Estado: ${E.name}</div>
+        <p class="vdesc">${E.desc}</p>
+      </div>
+    </div>
+    <div class="statgrid">
+      <div class="stat exig">
+        <div class="slabel">Lo que su entorno le exige</div>
+        <div class="snum">${nE}<i> / 4</i></div>
+        <div class="sbar">${[1,2,3,4].map(i=>`<i class="${i<=nE?'on':''}"></i>`).join('')}</div>
+        <div class="sends"><span>Baja</span><span>Alta</span></div>
+      </div>
+      <div class="stat prac">
+        <div class="slabel">Lo que su organización practica</div>
+        <div class="snum">${nP}<i> / 4</i></div>
+        <div class="sbar">${[1,2,3,4].map(i=>`<i class="${i<=nP?'on':''}"></i>`).join('')}</div>
+        <div class="sends"><span>Baja</span><span>Alta</span></div>
+      </div>
+    </div>`;
+
+  /* ---- 1b. perfil de las cinco capacidades (público) ---- */
+  const bandaPilar = n => n <= 2
+      ? { t:'Requiere atención', c:'lv-bajo' }
+      : n === 3 ? { t:'En desarrollo', c:'lv-medio' } : { t:'Más desarrollado', c:'lv-alto' };
+  document.getElementById('r_pilf').innerHTML = `
+    <div class="card">
+      <div class="rsection">Su perfil de capacidades</div>
+      <p class="small" style="margin-bottom:18px">Así aparecen en sus respuestas las cinco capacidades que mide Future Readiness. Es un orden relativo entre ellas, no una medición de cada una.</p>
+      <div class="pilgrid">
+        ${pilares.map(([n,v]) => { const b = bandaPilar(nivel(v)); return `
+          <div class="pilrow ${b.c}">
+            <span class="picon">${ICON[n]}</span>
+            <div class="pmain">
+              <div class="ptop"><span class="pname">${n}</span><span class="pband">${b.t}</span></div>
+              <span class="prail"><i style="width:${Math.max(pct(v),8)}%"></i></span>
+              <span class="psub">${LECTURAS[n].sub}</span>
+            </div>
+          </div>`; }).join('')}
+      </div>
+      <div class="pillegend">
+        <span><b style="background:var(--orange)"></b>Requiere atención</span>
+        <span><b style="background:var(--warn)"></b>En desarrollo</span>
+        <span><b style="background:var(--ok)"></b>Más desarrollado</span>
+      </div>
+    </div>`;
+
+  /* ---- 2. dónde aparecen las principales brechas ---- */
+  const nombresDebiles = debiles.map(p=>p[0]);
+  const parejo = nombresDebiles.length === pilares.length;
+  const listaDebiles = nombresDebiles.length === 1
+      ? `<b>${nombresDebiles[0]}</b>`
+      : nombresDebiles.slice(0,-1).map(n=>`<b>${n}</b>`).join(', ') + ' y <b>' + nombresDebiles.slice(-1) + '</b>';
+  document.getElementById('r_weak').innerHTML = `
+    <div class="card">
+      <div class="rsection">${parejo ? 'Un perfil parejo' : 'Dónde aparecen las principales brechas'}</div>
+      <div class="callout">
+        ${ICON.brechas}
+        <div>
+          ${parejo
+            ? `<p>Las cinco capacidades que mide este instrumento aparecen en un nivel equivalente en sus respuestas. Ninguna queda claramente por detrás de las otras.</p>
+               <p class="small">La conversación entonces se mueve desde dónde está la brecha hacia qué sostiene estas prácticas y qué pasaría si la exigencia del entorno cambia.</p>`
+            : `<p>De las cinco capacidades, ${nombresDebiles.length === 1 ? 'la que aparece con menor desarrollo en sus respuestas es' : 'las que aparecen con menor desarrollo en sus respuestas son'} ${listaDebiles}.</p>
+               ${nombresDebiles.length === 1 ? `<p class="small">${LECTURAS[nombresDebiles[0]].sub}.</p>` : ''}`}
+          ${completa ? '' : '<p class="small" style="color:var(--muted-dim)">La lectura de cada capacidad, con sus riesgos y líneas de trabajo, se hace en la sesión.</p>'}
+        </div>
+      </div>
+    </div>`;
+
+  /* ---- 3. contraste con la respuesta inicial ---- */
+  const nPrior = nivel(A.p1);
+  const priorTxt = {1:'nada preparada',2:'poco preparada',3:'medianamente preparada',4:'bastante preparada',5:'muy preparada'}[A.p1];
+  document.getElementById('r_prior').innerHTML = Math.abs(nPrior - E.rank) >= 2 ? `
+    <div class="card">
+      <div class="rsection">Lo que usted dijo al empezar</div>
+      <div class="callout">
+        ${ICON.prior}
+        <div><p>Al comenzar ubicó a su organización como <b>${priorTxt}</b>. Sus respuestas la ubican en <b>${E.name.toLowerCase()}</b>.</p></div>
+      </div>
+    </div>` : '';
+
+  /* ---- 4. su respuesta abierta ---- */
+  const txt = document.getElementById('p18').value.trim();
+  document.getElementById('r_quote').innerHTML = txt ? `
+    <div class="card">
+      <div class="rsection">Lo que usted nombró</div>
+      <div class="quotebox"><em>“${txt.replace(/</g,'&lt;')}”</em></div>
+      <p class="small" style="margin-top:16px">Eso ya ocurrió y ya tuvo un costo. Es el punto por donde parte la conversación.</p>
+    </div>` : '';
+
+  /* ---- 4b. un dato externo para dimensionar (vista pública) ---- */
+  let datoExterno = '';
+  if (MOSTRAR_CIFRA_EXTERNA && (key === 'expuesta' || key === 'fuera')) {
+    datoExterno = 'Un estudio longitudinal sobre preparación de futuro y desempeño empresarial siguió a un grupo de empresas durante siete años. Entre las que tenían deficiencias en sus prácticas, el <b>9% mejoró</b> su posición de rentabilidad y el <b>91% la mantuvo o la perdió</b>.';
+  } else if (MOSTRAR_CIFRA_EXTERNA && key === 'sobre') {
+    datoExterno = 'En un estudio longitudinal de siete años, el grupo con prácticas por sobre lo que su entorno exigía tuvo el desempeño más bajo de la muestra en capitalización de mercado, por debajo del grupo con deficiencias. Lo que separa un caso del otro es si la anticipación llega a la decisión.';
+  }
+  document.getElementById('r_evidence').innerHTML = datoExterno ? `
+    <div class="card">
+      <div class="rsection">Un dato para dimensionar</div>
+      <p style="font-size:16px;line-height:1.55;color:var(--cream-dim)">${datoExterno}</p>
+      <p class="small" style="margin-top:8px">Rohrbeck y Kum, <em>Technological Forecasting and Social Change</em>, 2018.</p>
+    </div>` : '';
+
+  /* =========================================================
+     BLOQUES RESERVADOS PARA LA SESIÓN DE LECTURA
+     ========================================================= */
+
+  /* ---- 5. el perfil de los cinco pilares ---- */
+  const ordenados = pilares.slice().sort((a,b)=>b[1]-a[1]);
+  const evid = '';
+  document.getElementById('r_pillars').innerHTML = !completa ? '' : `
+    <div class="card sessiononly">
+      <span class="sessionflag">Reporte de sesión</span>
+      <h3>Perfil de las cinco capacidades</h3>
+      <p class="small" style="margin-bottom:18px">Cada capacidad se estima con dos preguntas. El perfil sostiene un orden entre ellas, no una medición de cada una por separado.</p>
+      ${ordenados.map(([n,v]) => `
+        <div class="metric">
+          <div class="mh"><b>${n}${v===minVal?'<span class="tag"> · el más bajo</span>':''}</b><span>${dec(v)} de 5</span></div>
+          <div class="bar"><span style="width:${pct(v)}%" class="${v===minVal?'':'dim'}"></span></div>
+          <div class="small" style="margin-top:4px">${LECTURAS[n].sub}</div>
+        </div>`).join('')}
+      ${evid}
+    </div>`;
+
+  /* ---- 6. las brechas priorizadas (regla de las tres condiciones) ---- */
+  let bloqueGaps = '';
+  if (key === 'sobre') {
+    const integrar = pilares.find(p => p[0] === 'Integrar')[1];
+    bloqueGaps = `
+      <div class="gapitem">
+        <h4>Práctica por encima de la exigencia</h4>
+        <dl>
+          <dt>Qué puede estar señalando</dt>
+          <dd>La organización sostiene prácticas anticipatorias por encima de lo que su terreno le pide hoy. Puede ser preparación deliberada para un cambio que ya ven venir, y puede ser actividad que se reproduce a sí misma.</dd>
+          <dt>Dónde se decide</dt>
+          <dd>${integrar >= 3.5
+              ? 'Integrar aparece alto (' + dec(integrar) + ' de 5), lo que describe preparación que sí llega a la decisión. La conversación es cómo sostenerla.'
+              : 'Integrar aparece en ' + dec(integrar) + ' de 5, lo que describe lecturas de futuro que no están cambiando decisiones. Ahí está el trabajo, y no en producir más análisis.'}</dd>
+          <dt>Línea de trabajo</dt>
+          <dd>Conectar el trabajo anticipatorio que ya existe con el ciclo de decisión, en lugar de agregar más.</dd>
+        </dl>
+      </div>`;
+  } else {
+    const candidatas = pilares
+      .filter(p => p[1] < exigencia)
+      .sort((a,b) => (a[1]-b[1]))
+      .slice(0,2);
+    bloqueGaps = candidatas.length ? candidatas.map(([n,v]) => `
+      <div class="gapitem">
+        <h4>${n} · ${dec(v)} de 5, con una exigencia de entorno de ${dec(exigencia)}</h4>
+        <dl>
+          <dt>Qué puede estar señalando</dt><dd>${LECTURAS[n].senala}</dd>
+          <dt>Riesgo asociado</dt><dd>${LECTURAS[n].riesgo}</dd>
+          <dt>Capacidad a fortalecer</dt><dd>${LECTURAS[n].capacidad}</dd>
+        </dl>
+      </div>`).join('') : `
+      <div class="gapitem">
+        <h4>Sin brechas por sobre el umbral</h4>
+        <dl><dt>Lectura</dt><dd>Ninguna capacidad queda por debajo de la exigencia de su entorno. La conversación entonces es sobre qué cambiaría esa exigencia y qué sostiene las prácticas actuales.</dd></dl>
+      </div>`;
+  }
+  document.getElementById('r_gaps').innerHTML = !completa ? '' : `
+    <div class="card sessiononly">
+      <span class="sessionflag">Reporte de sesión</span>
+      <h3>Las brechas que conviene mirar</h3>
+      <p class="small" style="margin-bottom:18px">Se listan las capacidades que quedan por debajo de la exigencia del entorno, no todas las que puntúan bajo.</p>
+      ${bloqueGaps}
+    </div>`;
+
+  /* ---- 7. cómo mira usted el futuro (dos ejes de Polak) ---- */
+  const agn = A.p16, exp = A.p17;
+  const eje = (x, hi, mid, lo) => x >= 4 ? hi : x === 3 ? mid : lo;
+  document.getElementById('r_person').innerHTML = !completa ? '' : `
+    <div class="card sessiononly">
+      <span class="sessionflag">Reporte de sesión</span>
+      <h3>Cómo mira usted el futuro</h3>
+      <p style="font-size:15px;line-height:1.55">Usted llega a este diagnóstico con una <b>expectativa ${eje(exp,'favorable','reservada','crítica')}</b> sobre el futuro de su organización y un <b>sentido de agencia ${eje(agn,'alto','medio','bajo')}</b> para influir en él.</p>
+      <p style="font-size:15px;line-height:1.55;margin-top:10px">${
+        (agn >= 4 && nivel(practica) <= 2)
+          ? 'Su sentido de agencia está por encima de lo que la organización practica hoy. Esa distancia suele describir a alguien que ya vio algo y todavía no tiene dónde ponerlo.'
+          : 'En la sesión se contrasta esta mirada personal con lo que la organización practica.'
+      }</p>
+      <p class="small" style="margin-top:8px;color:var(--muted-dim)">Son dos ejes de la imagen del futuro (Polak): expectativa y agencia. No entran en el puntaje de la organización y no evalúan a la persona. Sirven para abrir la conversación.</p>
+    </div>`;
+
+  /* ---- CTA: qué incluye la sesión ---- */
+  document.getElementById('r_ctafeat').innerHTML = `
+    <div>${ICON.featDoc}<span>Lectura personalizada según su contexto y objetivos.</span></div>
+    <div>${ICON.featRisk}<span>Identificación de riesgos y oportunidades prioritarias.</span></div>
+    <div>${ICON.featPath}<span>Exploración de caminos para fortalecer sus capacidades.</span></div>`;
+
+  /* ---- nota de método ---- */
+  const nPreg = (A.p12 === 1) ? 17 : 18;
+  document.getElementById('r_method').innerHTML = `
+    <b>Nota de método.</b> Este instrumento tiene ${nPreg} preguntas y se responde en pocos minutos. Mide lo que usted percibe, no lo que una auditoría verificaría, y su resultado es orientativo.
+    La forma de calcularlo evalúa la preparación como la relación entre lo que el entorno exige y lo que la organización practica, en lugar de medirla contra un ideal. Las preguntas sobre el entorno se adaptaron de las escalas de complejidad y volatilidad de Day y Schoemaker (2005). La estructura de capacidades sigue el trabajo de Rohrbeck y Kum (2018). Las dos preguntas sobre cómo mira usted el futuro recogen los dos ejes de la imagen del futuro descritos por Polak (1973): la expectativa sobre lo que viene y el sentido de agencia para influir en ello. Quedan fuera del puntaje.
+    Nuestra adaptación al español y al contexto organizacional no hereda las propiedades psicométricas de las escalas originales.`;
+}
+
+/* logo del footer: reutiliza el mismo base64 del topnav */
+(function(){
+  const src = document.querySelector('nav.topnav .blogo');
+  const foot = document.getElementById('flogo');
+  if (src && foot) foot.src = src.src;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de privacidad · Memética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F1E9D9; --bg-card: #FBF6EA; --bg-card-2: #FDFAF2; --bg-elev: #FFFDF7;
+  --orange: #F03400; --orange-deep: #8E1F00; --orange-ink: #B32700;
+  --cream: #1A1712; --cream-dim: #3E382E; --muted: #625A4C; --muted-dim: #6E6657;
+  --line: #DFD5C0; --line-hi: #C9BDA3;
+  --display: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  --sans: 'Archivo', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg); color: var(--cream); font-family: var(--sans);
+  line-height: 1.65; -webkit-font-smoothing: antialiased; position: relative; padding-bottom: 60px;
+}
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:100; opacity:.05; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+::selection { background: var(--orange); color:#fff; }
+
+nav.topnav {
+  position:sticky; top:0; z-index:50; padding:18px 40px; display:flex;
+  justify-content:space-between; align-items:center;
+  background:linear-gradient(to bottom, rgba(241,233,217,.97) 60%, rgba(241,233,217,0) 100%);
+  backdrop-filter: blur(8px);
+}
+nav.topnav .blogo { width:104px; height:auto; display:block; }
+nav.topnav .meta-right { color:var(--muted); font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+@media (max-width:700px){ nav.topnav{padding:14px 20px} nav.topnav .meta-right{display:none} }
+
+.shell { max-width: 760px; margin:0 auto; padding: 0 40px; }
+@media (max-width:700px){ .shell{padding:0 20px} }
+
+.eyebrow {
+  display:inline-flex; align-items:center; gap:12px; font-size:12px; font-weight:700;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--orange-ink); margin-bottom:18px;
+}
+.eyebrow::before { content:""; width:24px; height:1px; background:var(--orange); }
+h1 { font-family:var(--display); font-size:clamp(28px,4.6vw,40px); line-height:1.08; letter-spacing:-.015em; margin-bottom:16px; }
+h2 {
+  font-family:var(--display); font-size:19px; line-height:1.2;
+  margin:38px 0 12px; padding-top:22px; border-top:1px solid var(--line);
+}
+h2 .num { font-family:var(--mono); font-size:12px; color:var(--orange-ink); font-weight:500; display:block; margin-bottom:6px; letter-spacing:.14em; }
+h3 { font-size:14.5px; font-weight:800; margin:20px 0 8px; }
+p { margin-bottom:12px; font-size:15.5px; color:var(--cream-dim); }
+p.lede { font-size:17px; color:var(--cream-dim); margin-bottom:6px; }
+ul { margin:0 0 14px 0; padding-left:0; list-style:none; }
+li { font-size:15.5px; color:var(--cream-dim); padding-left:18px; position:relative; margin-bottom:8px; }
+li::before { content:""; position:absolute; left:0; top:11px; width:6px; height:1.5px; background:var(--orange); }
+a { color:var(--orange-ink); text-decoration:underline; text-underline-offset:2px; }
+b, strong { color:var(--cream); font-weight:700; }
+.small { font-size:13px; color:var(--muted); }
+
+.meta {
+  display:flex; flex-wrap:wrap; gap:26px; margin:26px 0 8px; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.meta div { font-size:14px; color:var(--cream-dim); }
+.meta b { display:block; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:3px; }
+
+table { width:100%; border-collapse:collapse; margin:6px 0 16px; font-size:14.5px; }
+th, td { text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--cream-dim); }
+th { font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+tbody tr:last-child td { border-bottom:none; }
+.tablewrap { overflow-x:auto; background:var(--bg-card); border:1px solid var(--line); border-radius:4px; margin-bottom:16px; }
+
+.callout {
+  background:var(--bg-card); border:1px solid var(--line); border-left:3px solid var(--orange);
+  border-radius:3px; padding:18px 20px; margin:16px 0;
+}
+.callout p:last-child { margin-bottom:0; }
+
+.todo {
+  background:#FFE9C7; color:var(--orange-deep); font-weight:700;
+  padding:1px 7px; border-radius:2px; border:1px dashed var(--orange-deep);
+  font-family:var(--mono); font-size:13px;
+}
+
+.volver { margin-top:44px; padding-top:22px; border-top:1px solid var(--line); }
+.btn {
+  display:inline-block; font-family:var(--sans); font-size:14px; font-weight:700; letter-spacing:.04em;
+  padding:12px 26px; border-radius:3px; background:var(--orange); color:#fff; text-decoration:none;
+}
+.btn:hover { opacity:.88; }
+footer { margin-top:34px; padding-top:18px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+footer img { width:150px; height:auto; opacity:.85; }
+footer .small { max-width:46ch; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand"><img class="blogo" src="data:image/png;base64,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" alt="Memética"></div>
+  <div class="meta-right">Política de privacidad</div>
+</nav>
+
+<div class="shell">
+
+<div class="eyebrow">Memética</div>
+<h1>Política de privacidad y tratamiento de datos personales</h1>
+<p class="lede">Este documento explica qué datos personales recogemos cuando usted responde nuestro instrumento <b>"Future Readiness"</b>, para qué los usamos, con quién los compartimos, cuánto tiempo los conservamos y cómo puede ejercer sus derechos.</p>
+
+<div class="meta">
+  <div><b>Versión</b>1.0</div>
+  <div><b>Vigente desde</b>17 de agosto de 2026</div>
+  <div><b>Contacto</b>contacto@memetica.cl</div>
+  <div><b>Alcance</b>Instrumento Future Readiness</div>
+</div>
+
+<h2><span class="num">01</span>Quién trata sus datos</h2>
+<p>El responsable del tratamiento es <b>Futures Evolution Ltda.</b>, giro servicios profesionales, RUT <b>77.336.832-5</b>, con domicilio en Apoquindo 6410, oficina 605, Las Condes, Santiago, Chile, que opera bajo el nombre <b>Memética</b>.</p>
+<p>Para cualquier asunto relacionado con sus datos personales, incluido el ejercicio de los derechos que se describen en la sección 09, puede escribir a <a href="mailto:contacto@memetica.cl">contacto@memetica.cl</a>.</p>
+
+<h2><span class="num">02</span>Qué datos recogemos</h2>
+<p>Cuando usted responde el instrumento de Future Readiness, recogemos:</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Categoría</th><th>Datos</th><th>Obligatorio</th></tr></thead>
+  <tbody>
+    <tr><td>Identificación y contacto</td><td>Nombre y apellido, correo electrónico corporativo</td><td>Sí</td></tr>
+    <tr><td>Contexto profesional</td><td>Cargo, organización, rubro, número de personas que trabajan en la organización</td><td>Sí</td></tr>
+    <tr><td>Contexto profesional</td><td>Rango de facturación anual</td><td>No</td></tr>
+    <tr><td>Respuestas</td><td>Sus respuestas a las preguntas cerradas y a la pregunta abierta final</td><td>La pregunta abierta es opcional</td></tr>
+    <tr><td>Resultado</td><td>El estado de calibración y los puntajes que el instrumento calcula a partir de sus respuestas</td><td>Se genera de forma automática</td></tr>
+    <tr><td>Técnicos</td><td>Fecha y hora del envío</td><td>Se registra de forma automática</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Qué no recogemos</h3>
+<p>No pedimos ni queremos datos personales sensibles, entendiendo por tales los relativos a salud, origen étnico, situación socioeconómica, afiliación política o sindical, creencias, vida sexual o datos biométricos. Tampoco recogemos datos de terceros. La pregunta abierta final es un campo de texto libre: le pedimos que no incluya en ella información sensible, ni datos que permitan identificar a otras personas.</p>
+<p>No usamos cookies de seguimiento publicitario ni herramientas de perfilamiento de terceros en esta página.</p>
+
+<h2><span class="num">03</span>Para qué usamos sus datos</h2>
+<ul>
+  <li><b>Calcular y mostrarle su resultado</b> en pantalla al terminar el cuestionario.</li>
+  <li><b>Preparar la lectura de sus resultados</b> y ponernos en contacto con usted para ofrecerle la sesión de lectura, que es gratuita y opcional.</li>
+  <li><b>Contactarlo con información sobre nuestros servicios</b> relacionada con la materia del instrumento, mientras usted no manifieste lo contrario.</li>
+  <li><b>Producir estadísticas agregadas y anónimas</b> sobre preparación organizacional, que pueden ser publicadas. En esa publicación no aparece ninguna persona ni organización identificable.</li>
+</ul>
+<p>No vendemos sus datos. No los cedemos a terceros con fines comerciales. No los usamos para finalidades distintas de las anteriores sin pedirle antes una nueva autorización.</p>
+
+<h2><span class="num">04</span>Con qué fundamento los tratamos</h2>
+<p>La base de licitud del tratamiento es <b>su consentimiento</b>, que usted otorga al marcar la casilla correspondiente antes de comenzar el cuestionario. Ese consentimiento es libre, específico e informado, y usted puede revocarlo en cualquier momento escribiendo a <a href="mailto:contacto@memetica.cl">contacto@memetica.cl</a>, sin que ello afecte la licitud del tratamiento realizado antes de la revocación.</p>
+<p>Si usted revoca su consentimiento, dejamos de contactarlo y eliminamos sus datos según lo indicado en la sección 07.</p>
+
+<h2><span class="num">05</span>Cómo se calcula su resultado</h2>
+<p>El resultado que usted ve en pantalla se calcula de forma <b>automática</b> a partir de sus respuestas, con una fórmula fija que compara la exigencia que usted describe en su entorno con las prácticas que declara en su organización. El instrumento no usa inteligencia artificial ni consulta fuentes externas sobre usted o su organización.</p>
+<p>Ese cálculo <b>no produce efectos jurídicos sobre usted ni le afecta de manera significativa</b>: es un ejercicio de autodiagnóstico orientativo, basado en su propia percepción, y así se declara en la nota de método del propio instrumento. La interpretación posterior la realizan personas de nuestro equipo, no un sistema automatizado.</p>
+<p>Aun así, usted puede pedirnos que le expliquemos cómo se llegó a su resultado, solicitar que una persona lo revise, u oponerse a que ese resultado se use, escribiendo a <a href="mailto:contacto@memetica.cl">contacto@memetica.cl</a>.</p>
+
+<h2><span class="num">06</span>Quién más accede a sus datos</h2>
+<p>Sus datos son tratados por el equipo de Memética que trabaja en este instrumento. Además, utilizamos proveedores de servicios tecnológicos que actúan como encargados del tratamiento, siguiendo nuestras instrucciones y sin usar sus datos para fines propios:</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Proveedor</th><th>Para qué</th><th>Dónde se almacenan</th></tr></thead>
+  <tbody>
+    <tr><td>Google (Google Workspace, Sheets y Apps Script)</td><td>Recepción y almacenamiento de las respuestas, y envío de la notificación interna</td><td>Servidores fuera de Chile</td></tr>
+    <tr><td>Proveedor de correo electrónico</td><td>Comunicación con usted</td><td>Servidores fuera de Chile</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Transferencia internacional</h3>
+<p>Como estos proveedores almacenan la información fuera de Chile, sus datos son objeto de una transferencia internacional. Al marcar la casilla de consentimiento usted autoriza esa transferencia. Trabajamos con proveedores que declaran estándares de seguridad y confidencialidad equivalentes a los exigidos por la legislación chilena.</p>
+<p>También podemos entregar sus datos cuando una autoridad competente lo requiera en el ejercicio de sus facultades legales.</p>
+
+<h2><span class="num">07</span>Cuánto tiempo los conservamos</h2>
+<ul>
+  <li><b>Datos de contacto y respuestas identificables:</b> hasta <b>24 meses</b> desde su último contacto con nosotros, o hasta que usted solicite su eliminación o revoque su consentimiento, lo que ocurra primero.</li>
+  <li><b>Datos anonimizados para estadística:</b> de forma indefinida. Una vez anonimizados dejan de ser datos personales y no permiten identificarlo.</li>
+</ul>
+<p>Cumplido el plazo, eliminamos o anonimizamos la información.</p>
+
+<h2><span class="num">08</span>Cómo los protegemos</h2>
+<p>Aplicamos medidas de seguridad técnicas y organizativas proporcionales al riesgo: acceso restringido a las personas del equipo que lo necesitan para su trabajo, autenticación en los servicios donde se almacena la información, y transmisión cifrada entre su navegador y nuestros servicios.</p>
+<p>Si ocurriera una vulneración de seguridad que afecte sus datos personales y pueda entrañar un riesgo para sus derechos, se lo comunicaremos y daremos aviso a la autoridad, en los términos que exige la ley.</p>
+
+<h2><span class="num">09</span>Sus derechos</h2>
+<p>La ley chilena le reconoce los siguientes derechos sobre sus datos personales, que usted puede ejercer de forma gratuita:</p>
+<ul>
+  <li><b>Acceso.</b> Saber qué datos suyos tratamos, de dónde los obtuvimos y para qué los usamos.</li>
+  <li><b>Rectificación.</b> Corregir datos inexactos, desactualizados o incompletos.</li>
+  <li><b>Supresión.</b> Pedir que eliminemos sus datos, entre otros casos cuando revoque su consentimiento o cuando ya no sean necesarios para la finalidad que los originó.</li>
+  <li><b>Oposición.</b> Oponerse a un tratamiento determinado, incluido el envío de comunicaciones comerciales y el uso del resultado automatizado descrito en la sección 05.</li>
+  <li><b>Portabilidad.</b> Recibir sus datos en un formato estructurado y de uso común, y pedir que los transfiramos a otro responsable cuando sea técnicamente posible.</li>
+  <li><b>Bloqueo.</b> Pedir la suspensión temporal de cualquier operación de tratamiento, en los casos que la ley contempla.</li>
+</ul>
+
+<div class="callout">
+  <p><b>Cómo ejercerlos.</b> Escriba a <a href="mailto:contacto@memetica.cl">contacto@memetica.cl</a> indicando qué derecho quiere ejercer y desde qué correo electrónico respondió el instrumento. Podemos pedirle un antecedente adicional para verificar su identidad, con el único fin de evitar que un tercero acceda a sus datos. Responderemos dentro del plazo que establece la ley.</p>
+  <p>Si considera que su solicitud no fue atendida, puede reclamar ante la <b>Agencia de Protección de Datos Personales</b>.</p>
+</div>
+
+<h2><span class="num">10</span>Menores de edad</h2>
+<p>Este instrumento está dirigido a personas con responsabilidades de dirección, gerencia o jefatura en organizaciones, y no está dirigido a menores de edad. No recogemos datos de menores de forma consciente. Si detectamos que recibimos datos de un menor, los eliminamos.</p>
+
+<h2><span class="num">11</span>Cambios a esta política</h2>
+<p>Podemos actualizar este documento cuando cambien nuestras prácticas, nuestros proveedores o la normativa aplicable. La versión vigente es siempre la publicada en esta dirección, con su número de versión y fecha en el encabezado. Si el cambio afecta de manera sustancial la finalidad del tratamiento, se lo comunicaremos y, cuando corresponda, le pediremos un nuevo consentimiento.</p>
+
+<h2><span class="num">12</span>Marco legal</h2>
+<p>Este documento se rige por la <b>Ley 19.628 sobre protección de la vida privada</b>, actualmente vigente en Chile, y se ajusta desde ya a la <b>Ley 21.719</b>, que regula la protección y el tratamiento de los datos personales, crea la Agencia de Protección de Datos Personales, y entra en vigencia el 1 de diciembre de 2026.</p>
+
+<div class="volver">
+  <a class="btn" href="index.html">Volver al cuestionario</a>
+</div>
+
+<footer>
+  <img src="data:image/png;base64,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" alt="Memética">
+  <p class="small">Memética. Foresight Cultural, gobernanza y estrategia. <a href="https://memetica.cl">memetica.cl</a> · <a href="mailto:contacto@memetica.cl">contacto@memetica.cl</a></p>
+</footer>
+
+</div>
+
+</body>
+</html>
