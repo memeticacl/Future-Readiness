@@ -107,6 +107,24 @@ h3 { font-size:18px; font-weight:800; letter-spacing:.01em; margin-bottom:12px; 
 .likert .opt .dot { margin-top:0; }
 @media (max-width:620px){ .likert{grid-template-columns:repeat(5,1fr); } .likert .opt{font-size:11px; padding:11px 4px} }
 
+.qmap { display:flex; flex-direction:column; gap:15px; margin-top:2px; }
+.qmap > div { display:grid; grid-template-columns:78px 1fr; gap:14px; align-items:baseline; }
+.qmap .rng { font-family:var(--mono); font-size:12.5px; color:var(--orange-ink); letter-spacing:.05em; font-weight:500; }
+.qmap b { font-size:15.5px; }
+.qmap p { font-size:14.5px; line-height:1.5; color:var(--muted); margin-top:3px; }
+@media (max-width:620px){ .qmap > div { grid-template-columns:1fr; gap:2px; } }
+
+.multi { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.multi .opt { font-size:15px; padding:12px 14px; line-height:1.38; }
+.multi .opt .dot { width:20px; height:20px; border-radius:3px; }
+.multi .opt.sel .dot::after { content:"\2713"; font-size:12px; line-height:1; }
+.multi .opt.off { opacity:.42; }
+.multi .opt.off:hover { border-color:var(--line); background:var(--bg-card-2); }
+.multinote { font-size:14px; color:var(--muted); margin:-8px 0 14px; }
+.otrofield { margin-top:10px; }
+.otrofield.hidden { display:none; }
+@media (max-width:620px){ .multi{grid-template-columns:1fr} }
+
 .skipnote {
   font-size:14.5px; color:var(--muted); background:var(--bg-card-2);
   border:1px dashed var(--line-hi); border-radius:3px; padding:14px 16px;
@@ -180,6 +198,56 @@ h3 { font-size:18px; font-weight:800; letter-spacing:.01em; margin-bottom:12px; 
 .stat .sends { display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-top:6px; font-family:var(--mono); text-transform:uppercase; letter-spacing:.08em; }
 
 /* ---------- perfil de las cinco capacidades ---------- */
+/* ---------- el mapa del instrumento: las capacidades contra el listón del entorno ---------- */
+.lisenv { display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding:14px 18px;
+  background:var(--bg-elev); border:1px solid var(--line); border-left:3px solid var(--info);
+  border-radius:4px; }
+.lisenv .lab { font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--muted); white-space:nowrap; }
+.lisenv .val { font-size:17px; font-weight:800; color:var(--info); }
+.lisenv .dims { margin-left:auto; font-size:13.5px; color:var(--muted); text-align:right; line-height:1.45; }
+.lisenv .dims b { color:var(--info); font-weight:700; }
+.liswrap { position:relative; margin-top:30px; padding-top:24px; }
+.lisline { position:absolute; top:0; bottom:8px; width:0; border-left:2px dashed var(--info); z-index:3; }
+.lisline em { position:absolute; top:-3px; white-space:nowrap; font-style:normal;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--info); text-transform:uppercase; }
+.lisline em.izq { right:9px; } .lisline em.der { left:9px; }
+.lisrow { display:grid; grid-template-columns:58px 168px 1fr; gap:12px; align-items:center;
+  padding:6px 0; position:relative; z-index:2; }
+.lisrow .rng { font-family:var(--mono); font-size:11.5px; color:var(--muted-dim); }
+.lisrow .nm { font-size:15.5px; font-weight:700; line-height:1.25; }
+.listrack { height:26px; background:var(--line); border-radius:3px; position:relative; }
+.listrack i { position:absolute; top:0; bottom:0; left:0; border-radius:3px; display:flex;
+  align-items:center; justify-content:flex-end; padding-right:9px; font-family:var(--mono);
+  font-size:11px; font-weight:500; letter-spacing:.05em; color:#fff; white-space:nowrap; overflow:hidden; }
+.listrack b { position:absolute; top:-3px; bottom:-3px; width:0; border-left:2px dashed var(--info); display:none; }
+.lismobnote { display:none; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+  color:var(--info); text-transform:uppercase; margin-bottom:12px; }
+.listrack em { position:absolute; top:50%; transform:translateY(-50%); font-style:normal;
+  font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.05em; white-space:nowrap; }
+.lisrow.lv-alto  .listrack i { background:var(--ok); }
+.lisrow.lv-medio .listrack i { background:var(--warn); }
+.lisrow.lv-bajo  .listrack i { background:var(--orange); }
+.lisrow.lv-alto  .listrack em { color:var(--ok); }
+.lisrow.lv-medio .listrack em { color:var(--warn); }
+.lisrow.lv-bajo  .listrack em { color:var(--orange-ink); }
+.lisfoot { margin-top:18px; font-size:14px; color:var(--muted); line-height:1.5;
+  padding-left:14px; border-left:2px solid var(--line-hi); }
+.lisout { margin-top:24px; padding-top:20px; border-top:1px solid var(--line);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.lisout div { font-size:13.5px; color:var(--muted); line-height:1.45; }
+.lisout b { display:block; font-size:13.5px; color:var(--cream-dim); margin-bottom:3px; }
+.lisout .rn { display:block; font-family:var(--mono); font-size:10.5px; color:var(--orange-ink); letter-spacing:.1em; }
+@media (max-width:720px){
+  .lisrow { grid-template-columns:52px 1fr; gap:3px 10px; }
+  .lisrow .listrack { grid-column:1 / -1; margin-top:4px; }
+  .lisline { display:none; }
+  .listrack b { display:block; }
+  .lismobnote { display:block; }
+  .liswrap { padding-top:0; margin-top:24px; }
+  .lisout { grid-template-columns:1fr; gap:16px; }
+  .lisenv .dims { margin-left:0; text-align:left; flex-basis:100%; }
+}
+
 .pilgrid { display:flex; flex-direction:column; gap:12px; margin-top:4px; }
 .pilrow {
   display:grid; grid-template-columns:52px 1fr; gap:16px; align-items:center;
@@ -274,9 +342,9 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 <section id="s0" class="hero">
   <div class="eyebrow">Instrumento gratuito</div>
   <h1>¿Qué tan preparada está su organización para un futuro incierto?</h1>
-  <p class="lede">Dieciocho preguntas para ubicar la relación entre lo que su entorno le exige y lo que su organización practica hoy. El resultado aparece en pantalla al terminar.</p>
+  <p class="lede">Veinte preguntas sobre su organización y el terreno en que opera. El resultado aparece en pantalla al terminar, con el detalle de qué mide cada grupo de preguntas.</p>
   <div class="facts">
-    <div><b>Duración</b>7 a 9 minutos</div>
+    <div><b>Duración</b>8 a 10 minutos</div>
     <div><b>Responde</b>Una persona</div>
     <div><b>Resultado</b>Inmediato en pantalla</div>
     <div><b>Costo</b>Sin costo</div>
@@ -296,6 +364,9 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
       <div class="field"><label for="f_nombre">Nombre y apellido</label><input type="text" id="f_nombre"></div>
       <div class="field"><label for="f_email">Correo corporativo</label><input type="email" id="f_email"></div>
       <div class="field"><label for="f_cargo">Cargo</label><input type="text" id="f_cargo"></div>
+      <div class="field"><label for="f_nivel">Nivel de responsabilidad</label><select id="f_nivel">
+        <option value="">Seleccionar</option><option>Dirección o gerencia general</option><option>Gerencia de área</option>
+        <option>Jefatura o subgerencia</option><option>Profesional o especialista</option><option>Otro</option></select></div>
       <div class="field"><label for="f_org">Organización</label><input type="text" id="f_org"></div>
       <div class="field"><label for="f_rubro">Rubro</label><select id="f_rubro">
         <option value="">Seleccionar</option><option>Minería y recursos</option><option>Energía</option>
@@ -320,7 +391,7 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
     <div class="q">
       <div class="qnum">01</div>
       <div class="qtext">Pensando en los próximos diez años, ¿qué tan preparada diría que está su organización para enfrentar cambios relevantes en su entorno?</div>
-      <div class="qhint">Responda con lo primero que piense. Volveremos sobre esto al final.</div>
+      <div class="qhint">Responda con lo primero que piense.</div>
       <div class="likert" data-q="p1">
         <label class="opt"><input type="radio" name="p1" value="1"><span class="dot">1</span><span>Nada preparada</span></label>
         <label class="opt"><input type="radio" name="p1" value="2"><span class="dot">2</span><span>Poco</span></label>
@@ -336,39 +407,36 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 
 <!-- ============ PASO 2 ============ -->
 <section id="s2" class="hidden">
-  <div class="stepmeta"><span class="mono">Paso 2 de 4</span><span class="mono">Su entorno</span></div>
+  <div class="stepmeta"><span class="mono">Paso 2 de 4</span></div>
   <div class="progress"><span class="on"></span><span class="on"></span><span></span><span></span></div>
 
   <div class="card">
-    <h2>La exigencia de su entorno</h2>
-    <p class="small" style="margin-bottom:24px">Cuatro preguntas sobre el terreno en que opera su organización. No hay respuestas mejores ni peores: un entorno estable exige prácticas distintas a uno turbulento.</p>
-
     <div class="q">
-      <div class="qnum">02 · Complejidad</div>
-      <div class="qtext">¿Cuántos actores distintos influyen hoy en el resultado de su negocio (competidores, clientes, proveedores, reguladores, comunidades)?</div>
+      <div class="qnum">02</div>
+      <div class="qtext">¿Qué tan claro tiene hoy quiénes influyen en los resultados de su organización (clientes, competidores, proveedores, reguladores, comunidades)?</div>
       <div class="opts" data-q="p2">
-        <label class="opt"><input type="radio" name="p2" value="1"><span class="dot">1</span><span>Pocos y conocidos</span></label>
-        <label class="opt"><input type="radio" name="p2" value="2"><span class="dot">2</span><span>Varios, todos identificables</span></label>
-        <label class="opt"><input type="radio" name="p2" value="3"><span class="dot">3</span><span>Bastantes, con algunos nuevos</span></label>
-        <label class="opt"><input type="radio" name="p2" value="4"><span class="dot">4</span><span>Muchos, y cambian de rol</span></label>
-        <label class="opt"><input type="radio" name="p2" value="5"><span class="dot">5</span><span>Muchos, y aparecen actores nuevos con frecuencia</span></label>
+        <label class="opt"><input type="radio" name="p2" value="1"><span class="dot">1</span><span>Son pocos y los tenemos claros</span></label>
+        <label class="opt"><input type="radio" name="p2" value="2"><span class="dot">2</span><span>Son varios, y los podemos nombrar</span></label>
+        <label class="opt"><input type="radio" name="p2" value="3"><span class="dot">3</span><span>Son bastantes, y van apareciendo algunos nuevos</span></label>
+        <label class="opt"><input type="radio" name="p2" value="4"><span class="dot">4</span><span>Son muchos, y su papel va cambiando</span></label>
+        <label class="opt"><input type="radio" name="p2" value="5"><span class="dot">5</span><span>No tenemos suficientemente claro quiénes son todos los que influyen</span></label>
       </div>
     </div>
 
     <div class="q">
-      <div class="qnum">03 · Complejidad</div>
-      <div class="qtext">¿Qué tan difícil resulta anticipar lo que van a hacer esos actores?</div>
+      <div class="qnum">03</div>
+      <div class="qtext">¿Con qué frecuencia esas personas u organizaciones hacen algo que ustedes no esperaban?</div>
       <div class="opts" data-q="p3">
-        <label class="opt"><input type="radio" name="p3" value="1"><span class="dot">1</span><span>Sus movimientos son bastante previsibles</span></label>
-        <label class="opt"><input type="radio" name="p3" value="2"><span class="dot">2</span><span>En general los anticipamos</span></label>
-        <label class="opt"><input type="radio" name="p3" value="3"><span class="dot">3</span><span>A veces nos sorprenden</span></label>
-        <label class="opt"><input type="radio" name="p3" value="4"><span class="dot">4</span><span>Nos sorprenden seguido</span></label>
-        <label class="opt"><input type="radio" name="p3" value="5"><span class="dot">5</span><span>Rara vez logramos anticiparlos</span></label>
+        <label class="opt"><input type="radio" name="p3" value="1"><span class="dot">1</span><span>Casi nunca. Sabemos bastante bien cómo podrían actuar</span></label>
+        <label class="opt"><input type="radio" name="p3" value="2"><span class="dot">2</span><span>Pocas veces</span></label>
+        <label class="opt"><input type="radio" name="p3" value="3"><span class="dot">3</span><span>De vez en cuando</span></label>
+        <label class="opt"><input type="radio" name="p3" value="4"><span class="dot">4</span><span>Con frecuencia</span></label>
+        <label class="opt"><input type="radio" name="p3" value="5"><span class="dot">5</span><span>Casi siempre nos sorprende cómo actúan</span></label>
       </div>
     </div>
 
     <div class="q">
-      <div class="qnum">04 · Volatilidad</div>
+      <div class="qnum">04</div>
       <div class="qtext">En los últimos tres años, ¿cuánto afectaron a su organización cambios que no dependían de ella (regulación, tecnología, mercado, clima social)?</div>
       <div class="opts" data-q="p4">
         <label class="opt"><input type="radio" name="p4" value="1"><span class="dot">1</span><span>Casi nada</span></label>
@@ -380,14 +448,14 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
     </div>
 
     <div class="q">
-      <div class="qnum">05 · Volatilidad</div>
-      <div class="qtext">¿Qué tan difícil resulta anticipar la evolución de los factores que más podrían transformar su sector en los próximos años (tecnología, regulación, nuevos modelos de negocio, cambios sociales)?</div>
+      <div class="qnum">05</div>
+      <div class="qtext">Pensando en lo que más podría transformar su sector en los próximos años (tecnología, regulación, nuevos modelos de negocio, cambios sociales), ¿qué tan claro tiene hacia dónde va?</div>
       <div class="opts" data-q="p5">
-        <label class="opt"><input type="radio" name="p5" value="1"><span class="dot">1</span><span>Bastante predecible</span></label>
-        <label class="opt"><input type="radio" name="p5" value="2"><span class="dot">2</span><span>Predecible con márgenes manejables</span></label>
-        <label class="opt"><input type="radio" name="p5" value="3"><span class="dot">3</span><span>Existen dudas relevantes</span></label>
-        <label class="opt"><input type="radio" name="p5" value="4"><span class="dot">4</span><span>Difícil de anticipar</span></label>
-        <label class="opt"><input type="radio" name="p5" value="5"><span class="dot">5</span><span>Muy difícil de anticipar</span></label>
+        <label class="opt"><input type="radio" name="p5" value="1"><span class="dot">1</span><span>Bastante claro. Sabemos hacia dónde va</span></label>
+        <label class="opt"><input type="radio" name="p5" value="2"><span class="dot">2</span><span>Claro en lo principal, con algunos márgenes</span></label>
+        <label class="opt"><input type="radio" name="p5" value="3"><span class="dot">3</span><span>Hay dudas relevantes sobre varios de esos factores</span></label>
+        <label class="opt"><input type="radio" name="p5" value="4"><span class="dot">4</span><span>Poco claro en la mayoría</span></label>
+        <label class="opt"><input type="radio" name="p5" value="5"><span class="dot">5</span><span>No tenemos claro hacia dónde va</span></label>
       </div>
     </div>
   </div>
@@ -397,71 +465,64 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 
 <!-- ============ PASO 3 ============ -->
 <section id="s3" class="hidden">
-  <div class="stepmeta"><span class="mono">Paso 3 de 4</span><span class="mono">Lo que su organización practica</span></div>
+  <div class="stepmeta"><span class="mono">Paso 3 de 4</span></div>
   <div class="progress"><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div>
 
   <div class="card">
-    <div class="pillarhead">Percibir</div>
-    <div class="pillarsub">Buscar y dar significado a los cambios que podrían importar.</div>
+    <p class="small" style="margin-bottom:24px">Responda por lo que ocurre habitualmente, no por lo que debería ocurrir.</p>
 
     <div class="q">
       <div class="qnum">06</div>
-      <div class="qtext">¿Con qué sistematicidad su organización busca señales de cambios que podrían afectar su futuro?</div>
+      <div class="qtext">¿Con qué regularidad su organización busca cambios que podrían afectar su futuro?</div>
       <div class="opts" data-q="p6">
-        <label class="opt"><input type="radio" name="p6" value="1"><span class="dot">1</span><span>No las buscamos de forma sistemática; trabajamos con la información que llega</span></label>
-        <label class="opt"><input type="radio" name="p6" value="2"><span class="dot">2</span><span>Seguimos principalmente información de nuestra propia industria</span></label>
-        <label class="opt"><input type="radio" name="p6" value="3"><span class="dot">3</span><span>Revisamos periódicamente tendencias y cambios relevantes</span></label>
-        <label class="opt"><input type="radio" name="p6" value="4"><span class="dot">4</span><span>Hacemos una búsqueda sistemática que incluye fuentes y cambios de fuera de nuestro sector</span></label>
-        <label class="opt"><input type="radio" name="p6" value="5"><span class="dot">5</span><span>Tenemos una práctica sistemática de búsqueda, registro y revisión de señales y cambios emergentes</span></label>
+        <label class="opt"><input type="radio" name="p6" value="1"><span class="dot">1</span><span>No los buscamos de forma regular. Trabajamos con la información que llega</span></label>
+        <label class="opt"><input type="radio" name="p6" value="2"><span class="dot">2</span><span>Seguimos sobre todo lo que pasa en nuestra propia industria</span></label>
+        <label class="opt"><input type="radio" name="p6" value="3"><span class="dot">3</span><span>Revisamos cada cierto tiempo tendencias y cambios relevantes</span></label>
+        <label class="opt"><input type="radio" name="p6" value="4"><span class="dot">4</span><span>Buscamos de forma regular, incluyendo fuentes y cambios de fuera de nuestro sector</span></label>
+        <label class="opt"><input type="radio" name="p6" value="5"><span class="dot">5</span><span>Tenemos una práctica instalada de buscar, registrar y revisar cambios que recién empiezan a aparecer</span></label>
       </div>
     </div>
 
     <div class="q">
       <div class="qnum">07</div>
-      <div class="qtext">Cuando se detecta una señal o cambio que podría ser relevante para la organización, ¿qué ocurre normalmente?</div>
+      <div class="qtext">Cuando alguien en su organización nota un cambio que podría ser importante, ¿qué pasa normalmente?</div>
       <div class="opts" data-q="p7">
-        <label class="opt"><input type="radio" name="p7" value="1"><span class="dot">1</span><span>Generalmente no hay una instancia donde analizarlo</span></label>
+        <label class="opt"><input type="radio" name="p7" value="1"><span class="dot">1</span><span>Por lo general no hay dónde ponerlo sobre la mesa</span></label>
         <label class="opt"><input type="radio" name="p7" value="2"><span class="dot">2</span><span>Se comenta de manera informal entre algunas personas</span></label>
-        <label class="opt"><input type="radio" name="p7" value="3"><span class="dot">3</span><span>En algunos casos se analiza en reuniones o instancias existentes</span></label>
-        <label class="opt"><input type="radio" name="p7" value="4"><span class="dot">4</span><span>Existe una instancia definida para interpretar sus posibles implicancias</span></label>
-        <label class="opt"><input type="radio" name="p7" value="5"><span class="dot">5</span><span>Se analiza de forma sistemática, se conecta con otras señales, y sus implicancias alimentan decisiones estratégicas</span></label>
+        <label class="opt"><input type="radio" name="p7" value="3"><span class="dot">3</span><span>En algunos casos se conversa en reuniones que ya existen</span></label>
+        <label class="opt"><input type="radio" name="p7" value="4"><span class="dot">4</span><span>Hay una instancia definida donde se analiza qué podría implicar</span></label>
+        <label class="opt"><input type="radio" name="p7" value="5"><span class="dot">5</span><span>Se analiza con método, se conecta con otros cambios, y eso alimenta conversaciones o decisiones estratégicas</span></label>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="pillarhead">Anticipar</div>
-    <div class="pillarsub">Explorar futuros alternativos y revisar los supuestos desde los que se decide.</div>
-
     <div class="q">
       <div class="qnum">08</div>
-      <div class="qtext">¿Con cuántos futuros o escenarios alternativos trabaja hoy su planificación estratégica?</div>
+      <div class="qtext">Cuando su organización planifica, ¿sobre cuántas versiones distintas del futuro trabaja?</div>
       <div class="opts" data-q="p8">
-        <label class="opt"><input type="radio" name="p8" value="1"><span class="dot">1</span><span>Con ninguno explícito</span></label>
-        <label class="opt"><input type="radio" name="p8" value="2"><span class="dot">2</span><span>Con uno: que las cosas continúen aproximadamente como hoy</span></label>
-        <label class="opt"><input type="radio" name="p8" value="3"><span class="dot">3</span><span>Con uno principal y un escenario de contingencia</span></label>
-        <label class="opt"><input type="radio" name="p8" value="4"><span class="dot">4</span><span>Con varios escenarios significativamente distintos entre sí</span></label>
-        <label class="opt"><input type="radio" name="p8" value="5"><span class="dot">5</span><span>Con varios escenarios, y con decisiones asociadas a cómo estos podrían evolucionar</span></label>
+        <label class="opt"><input type="radio" name="p8" value="1"><span class="dot">1</span><span>No lo hacemos explícito</span></label>
+        <label class="opt"><input type="radio" name="p8" value="2"><span class="dot">2</span><span>Sobre una sola: la que esperamos que ocurra</span></label>
+        <label class="opt"><input type="radio" name="p8" value="3"><span class="dot">3</span><span>Sobre una principal, con un plan de respaldo por si las cosas se complican</span></label>
+        <label class="opt"><input type="radio" name="p8" value="4"><span class="dot">4</span><span>Sobre varias versiones claramente distintas entre sí</span></label>
+        <label class="opt"><input type="radio" name="p8" value="5"><span class="dot">5</span><span>Sobre varias versiones distintas, y cada una tiene decisiones asociadas</span></label>
       </div>
     </div>
 
     <div class="q">
       <div class="qnum">09</div>
-      <div class="qtext">¿Con qué frecuencia se cuestionan de forma explícita los supuestos sobre los que descansa la estrategia o el plan?</div>
+      <div class="qtext">¿Con qué frecuencia su organización pone a prueba las cosas que da por seguras sobre su mercado, sus clientes o su sector?</div>
       <div class="opts" data-q="p9">
         <label class="opt"><input type="radio" name="p9" value="1"><span class="dot">1</span><span>No ocurre</span></label>
-        <label class="opt"><input type="radio" name="p9" value="2"><span class="dot">2</span><span>Principalmente cuando algo sale mal</span></label>
+        <label class="opt"><input type="radio" name="p9" value="2"><span class="dot">2</span><span>Sobre todo cuando algo sale mal</span></label>
         <label class="opt"><input type="radio" name="p9" value="3"><span class="dot">3</span><span>Durante la planificación anual</span></label>
-        <label class="opt"><input type="radio" name="p9" value="4"><span class="dot">4</span><span>En instancias definidas y sistemáticas</span></label>
-        <label class="opt"><input type="radio" name="p9" value="5"><span class="dot">5</span><span>De forma sistemática, y esa revisión ha modificado decisiones concretas</span></label>
+        <label class="opt"><input type="radio" name="p9" value="4"><span class="dot">4</span><span>En instancias definidas y regulares</span></label>
+        <label class="opt"><input type="radio" name="p9" value="5"><span class="dot">5</span><span>De forma regular, y esa revisión ha cambiado decisiones concretas</span></label>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="pillarhead">Integrar</div>
-    <div class="pillarsub">Que la lectura de futuro llegue a la decisión.</div>
-
     <div class="q">
       <div class="qnum">10</div>
       <div class="qtext">En los últimos 12 meses, ¿cuántas decisiones relevantes (inversión, portafolio, estructura, alianzas) cambiaron de rumbo a partir de una lectura de futuro?</div>
@@ -476,13 +537,13 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 
     <div class="q">
       <div class="qnum">11</div>
-      <div class="qtext">¿En qué medida las decisiones estratégicas relevantes consideran de forma explícita señales, escenarios o supuestos sobre el futuro?</div>
+      <div class="qtext">¿En qué medida las decisiones estratégicas importantes toman en cuenta de forma explícita lo que la organización observa y espera del futuro?</div>
       <div class="opts" data-q="p11">
-        <label class="opt"><input type="radio" name="p11" value="1"><span class="dot">1</span><span>No los consideran de forma explícita</span></label>
+        <label class="opt"><input type="radio" name="p11" value="1"><span class="dot">1</span><span>No lo toman en cuenta de forma explícita</span></label>
         <label class="opt"><input type="radio" name="p11" value="2"><span class="dot">2</span><span>Ocurre de manera excepcional y depende de algunas personas</span></label>
-        <label class="opt"><input type="radio" name="p11" value="3"><span class="dot">3</span><span>Se consideran en algunas decisiones importantes</span></label>
-        <label class="opt"><input type="radio" name="p11" value="4"><span class="dot">4</span><span>Se incorporan de forma sistemática en las principales decisiones estratégicas</span></label>
-        <label class="opt"><input type="radio" name="p11" value="5"><span class="dot">5</span><span>Forman parte habitual de los criterios con que se evalúan decisiones, inversiones y prioridades</span></label>
+        <label class="opt"><input type="radio" name="p11" value="3"><span class="dot">3</span><span>Se toma en cuenta en algunas decisiones importantes</span></label>
+        <label class="opt"><input type="radio" name="p11" value="4"><span class="dot">4</span><span>Se incorpora de forma regular en las principales decisiones estratégicas</span></label>
+        <label class="opt"><input type="radio" name="p11" value="5"><span class="dot">5</span><span>Es parte habitual de los criterios con que se evalúan decisiones, inversiones y prioridades</span></label>
       </div>
     </div>
   </div>
@@ -492,76 +553,69 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 
 <!-- ============ PASO 4 ============ -->
 <section id="s4" class="hidden">
-  <div class="stepmeta"><span class="mono">Paso 4 de 4</span><span class="mono">Experimentar, aprender y usted</span></div>
+  <div class="stepmeta"><span class="mono">Paso 4 de 4</span></div>
   <div class="progress"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
 
   <div class="card">
-    <div class="pillarhead">Experimentar</div>
-    <div class="pillarsub">Actuar de forma acotada para averiguar lo que no se sabe.</div>
-
     <div class="q">
       <div class="qnum">12</div>
-      <div class="qtext">¿Su organización realiza pruebas de bajo costo (pilotos, prototipos o experimentos) para aprender frente a oportunidades o cambios sobre los que existe incertidumbre?</div>
+      <div class="qtext">¿Su organización hace pruebas de bajo costo (pilotos, prototipos, experimentos) para aprender frente a oportunidades o cambios sobre los que no hay certeza?</div>
       <div class="opts" data-q="p12">
         <label class="opt"><input type="radio" name="p12" value="1"><span class="dot">1</span><span>No</span></label>
-        <label class="opt"><input type="radio" name="p12" value="2"><span class="dot">2</span><span>De forma ocasional y sin un método definido</span></label>
-        <label class="opt"><input type="radio" name="p12" value="3"><span class="dot">3</span><span>Sí, principalmente dentro de algunas áreas</span></label>
-        <label class="opt"><input type="radio" name="p12" value="4"><span class="dot">4</span><span>Sí, de manera sistemática y con recursos asignados</span></label>
-        <label class="opt"><input type="radio" name="p12" value="5"><span class="dot">5</span><span>Sí, como práctica habitual para aprender antes de tomar decisiones o realizar apuestas mayores</span></label>
+        <label class="opt"><input type="radio" name="p12" value="2"><span class="dot">2</span><span>De vez en cuando, sin un método definido</span></label>
+        <label class="opt"><input type="radio" name="p12" value="3"><span class="dot">3</span><span>Sí, sobre todo dentro de algunas áreas</span></label>
+        <label class="opt"><input type="radio" name="p12" value="4"><span class="dot">4</span><span>Sí, de manera regular y con recursos asignados</span></label>
+        <label class="opt"><input type="radio" name="p12" value="5"><span class="dot">5</span><span>Sí, como práctica habitual para aprender antes de decidir o de comprometer algo mayor</span></label>
       </div>
     </div>
 
     <div class="q" id="q13">
       <div class="qnum">13</div>
-      <div class="qtext">Cuando la organización experimenta o realiza un piloto, ¿qué tan definidos están de antemano qué se quiere aprender y los criterios para decidir si continuar, modificar o detener la iniciativa?</div>
+      <div class="qtext">Cuando su organización hace una prueba o un piloto, ¿qué tan definido está de antemano qué se quiere aprender y con qué criterio se decide continuar, cambiar o detener?</div>
       <div class="opts" data-q="p13">
-        <label class="opt"><input type="radio" name="p13" value="1"><span class="dot">1</span><span>Normalmente no se definen</span></label>
-        <label class="opt"><input type="radio" name="p13" value="2"><span class="dot">2</span><span>Se definen de manera informal</span></label>
-        <label class="opt"><input type="radio" name="p13" value="3"><span class="dot">3</span><span>Se definen en algunos experimentos</span></label>
-        <label class="opt"><input type="radio" name="p13" value="4"><span class="dot">4</span><span>Se definen de forma explícita en la mayoría de los casos</span></label>
-        <label class="opt"><input type="radio" name="p13" value="5"><span class="dot">5</span><span>Son parte sistemática del diseño de los experimentos y de las decisiones posteriores</span></label>
+        <label class="opt"><input type="radio" name="p13" value="1"><span class="dot">1</span><span>Por lo general no se define</span></label>
+        <label class="opt"><input type="radio" name="p13" value="2"><span class="dot">2</span><span>Se define de manera informal</span></label>
+        <label class="opt"><input type="radio" name="p13" value="3"><span class="dot">3</span><span>Se define en algunos casos</span></label>
+        <label class="opt"><input type="radio" name="p13" value="4"><span class="dot">4</span><span>Se define de forma explícita en la mayoría de los casos</span></label>
+        <label class="opt"><input type="radio" name="p13" value="5"><span class="dot">5</span><span>Es parte del diseño de cada prueba, y de lo que se decide después</span></label>
       </div>
     </div>
     <div class="q hidden" id="q13skip">
-      <div class="skipnote">La pregunta siguiente no aplica en su caso, porque su organización todavía no realiza este tipo de pruebas.</div>
+      <div class="skipnote">La pregunta siguiente no aplica en su caso.</div>
     </div>
   </div>
 
   <div class="card">
-    <div class="pillarhead">Aprender y adaptarse</div>
-    <div class="pillarsub">Convertir la sorpresa y el error en cambio.</div>
-
     <div class="q">
       <div class="qnum">14</div>
-      <div class="qtext">Cuando ocurre algo significativamente distinto de lo esperado, ¿qué tan sistemáticamente la organización revisa qué supuestos fallaron y qué puede aprender de ello?</div>
+      <div class="qtext">Cuando pasa algo muy distinto de lo que esperaban, ¿qué tan seguido su organización se detiene a revisar qué daba por seguro y no era así?</div>
       <div class="opts" data-q="p14">
         <label class="opt"><input type="radio" name="p14" value="1"><span class="dot">1</span><span>No suele hacerlo</span></label>
         <label class="opt"><input type="radio" name="p14" value="2"><span class="dot">2</span><span>Se conversa de manera informal</span></label>
         <label class="opt"><input type="radio" name="p14" value="3"><span class="dot">3</span><span>Ocurre en algunos casos</span></label>
-        <label class="opt"><input type="radio" name="p14" value="4"><span class="dot">4</span><span>Existe una práctica definida para hacerlo</span></label>
-        <label class="opt"><input type="radio" name="p14" value="5"><span class="dot">5</span><span>Se hace de forma sistemática, y el aprendizaje queda disponible para decisiones futuras</span></label>
+        <label class="opt"><input type="radio" name="p14" value="4"><span class="dot">4</span><span>Hay una práctica definida para hacerlo</span></label>
+        <label class="opt"><input type="radio" name="p14" value="5"><span class="dot">5</span><span>Se hace de forma regular, y lo aprendido queda disponible para decisiones futuras</span></label>
       </div>
     </div>
 
     <div class="q">
       <div class="qnum">15</div>
-      <div class="qtext">¿Con qué frecuencia los aprendizajes provenientes de errores, sorpresas o experimentos se traducen en cambios concretos en decisiones, estrategias o formas de trabajar?</div>
+      <div class="qtext">¿Con qué frecuencia lo que su organización aprende de errores, sorpresas o pruebas se traduce en cambios concretos en decisiones, estrategias o formas de trabajar?</div>
       <div class="opts" data-q="p15">
         <label class="opt"><input type="radio" name="p15" value="1"><span class="dot">1</span><span>Prácticamente nunca</span></label>
-        <label class="opt"><input type="radio" name="p15" value="2"><span class="dot">2</span><span>De manera ocasional</span></label>
+        <label class="opt"><input type="radio" name="p15" value="2"><span class="dot">2</span><span>De vez en cuando</span></label>
         <label class="opt"><input type="radio" name="p15" value="3"><span class="dot">3</span><span>En algunos casos</span></label>
         <label class="opt"><input type="radio" name="p15" value="4"><span class="dot">4</span><span>Con frecuencia</span></label>
-        <label class="opt"><input type="radio" name="p15" value="5"><span class="dot">5</span><span>De forma sistemática; podemos identificar decisiones o prácticas que han cambiado a partir de esos aprendizajes</span></label>
+        <label class="opt"><input type="radio" name="p15" value="5"><span class="dot">5</span><span>De forma regular. Podemos identificar decisiones o prácticas que cambiaron por eso</span></label>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="pillarhead">Cómo mira usted el futuro</div>
-    <div class="pillarsub">Dos preguntas sobre usted, no sobre su organización. No entran en el puntaje.</div>
+    <p class="small" style="margin-bottom:24px">Las dos siguientes son sobre usted, no sobre su organización.</p>
 
     <div class="q">
-      <div class="qnum">16 · Agencia</div>
+      <div class="qnum">16</div>
       <div class="qtext">Con lo que hago puedo influir en cómo será el futuro de mi organización.</div>
       <div class="likert" data-q="p16">
         <label class="opt"><input type="radio" name="p16" value="1"><span class="dot">1</span><span>Muy en desacuerdo</span></label>
@@ -573,7 +627,7 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
     </div>
 
     <div class="q">
-      <div class="qnum">17 · Expectativa</div>
+      <div class="qnum">17</div>
       <div class="qtext">Creo que a mi organización le espera un futuro mejor que su presente.</div>
       <div class="likert" data-q="p17">
         <label class="opt"><input type="radio" name="p17" value="1"><span class="dot">1</span><span>Muy en desacuerdo</span></label>
@@ -586,12 +640,53 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
   </div>
 
   <div class="card">
+    <h2>Para cerrar</h2>
+
     <div class="q">
-      <div class="qnum">18 · Última pregunta</div>
+      <div class="qnum">18</div>
       <div class="qtext">¿Qué cambio de los últimos tres años tomó por sorpresa a su organización?</div>
+      <div class="qhint">Opcional. Una o dos líneas bastan.</div>
       <div class="field"><textarea id="p18" placeholder="Una o dos líneas bastan."></textarea></div>
     </div>
-  </div>
+
+    <div class="q">
+      <div class="qnum">19</div>
+      <div class="qtext">¿Qué cambios externos podrían tener mayor impacto en su organización en los próximos tres a cinco años?</div>
+      <div class="multinote">Elija hasta dos.</div>
+      <div class="multi" data-q="p19" data-max="2">
+        <label class="opt"><input type="checkbox" name="p19" value="Inteligencia artificial y automatización"><span class="dot"></span><span>Inteligencia artificial y automatización</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Regulación y normativa"><span class="dot"></span><span>Regulación y normativa</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Nuevos competidores o modelos de negocio"><span class="dot"></span><span>Nuevos competidores o modelos de negocio</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Cambios en lo que esperan los clientes"><span class="dot"></span><span>Cambios en lo que esperan los clientes</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Costos y condiciones económicas"><span class="dot"></span><span>Costos y condiciones económicas</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Disponibilidad de talento"><span class="dot"></span><span>Disponibilidad de talento</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Cambio climático y presión ambiental"><span class="dot"></span><span>Cambio climático y presión ambiental</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Cambios sociales y expectativas de las comunidades"><span class="dot"></span><span>Cambios sociales y expectativas de las comunidades</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Geopolítica y cadenas de suministro"><span class="dot"></span><span>Geopolítica y cadenas de suministro</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Tecnología propia del sector"><span class="dot"></span><span>Tecnología propia del sector</span></label>
+        <label class="opt"><input type="checkbox" name="p19" value="Otro"><span class="dot"></span><span>Otro</span></label>
+      </div>
+      <div class="field otrofield hidden" id="p19otro_w"><input type="text" id="p19otro" placeholder="¿Cuál?"></div>
+    </div>
+
+    <div class="q" style="margin-bottom:0">
+      <div class="qnum">20</div>
+      <div class="qtext">Si ese cambio ocurriera, ¿qué le haría más difícil a su organización responder a tiempo?</div>
+      <div class="multinote">Elija hasta dos. Puede saltarla si prefiere.</div>
+      <div class="multi" data-q="p20" data-max="2">
+        <label class="opt"><input type="checkbox" name="p20" value="La cultura y la forma de hacer las cosas"><span class="dot"></span><span>La cultura y la forma de hacer las cosas</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="El liderazgo y sus prioridades"><span class="dot"></span><span>El liderazgo y sus prioridades</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="Los recursos disponibles"><span class="dot"></span><span>Los recursos disponibles</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="Los procesos internos y la burocracia"><span class="dot"></span><span>Los procesos internos y la burocracia</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="Las capacidades del equipo"><span class="dot"></span><span>Las capacidades del equipo</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="La tecnología y los sistemas"><span class="dot"></span><span>La tecnología y los sistemas</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="La información disponible para decidir"><span class="dot"></span><span>La información disponible para decidir</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="La coordinación entre áreas"><span class="dot"></span><span>La coordinación entre áreas</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="La falta de una estrategia clara"><span class="dot"></span><span>La falta de una estrategia clara</span></label>
+        <label class="opt"><input type="checkbox" name="p20" value="Otro"><span class="dot"></span><span>Otro</span></label>
+      </div>
+      <div class="field otrofield hidden" id="p20otro_w"><input type="text" id="p20otro" placeholder="¿Cuál?"></div>
+    </div>
   <div class="warnmsg" id="w4">Faltan preguntas por responder en este paso.</div>
   <div class="nav-btns"><button class="btn ghost" onclick="go(3)">Atrás</button><button class="btn" onclick="next(4)">Ver mi resultado</button></div>
 </section>
@@ -600,10 +695,10 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 <section id="s5" class="hidden">
   <div class="eyebrow">Su resultado</div>
   <div id="r_state"></div>
-  <div id="r_pilf"></div>
+  <div id="r_map"></div>
+  <div id="r_dist"></div>
   <div id="r_weak"></div>
   <div id="r_prior"></div>
-  <div id="r_quote"></div>
   <div id="r_evidence"></div>
 
   <!-- bloques reservados para la sesión de lectura -->
@@ -611,12 +706,16 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
   <div id="r_gaps"></div>
   <div id="r_person"></div>
 
-  <div class="cta">
-    <h2>Conversemos sobre sus resultados</h2>
-    <p>Una sesión de lectura de resultados de 45 minutos para revisar en detalle su diagnóstico, las brechas que importan para su contexto y las líneas de acción posibles.</p>
+  <div class="cta" id="r_cta">
+    <h2>¿Le interesa saber cómo su organización puede fortalecer su posición frente al futuro?</h2>
+    <p>Revisamos su resultado completo y le escribimos.</p>
     <div class="ctafeat" id="r_ctafeat"></div>
-    <button class="btn" onclick="location.href='mailto:contacto@memetica.cl?subject='+encodeURIComponent('Sesión de lectura de resultados · Future Readiness')">Agendar la sesión · 45 minutos</button>
-    <p class="ctanote">Sin costo y sin compromiso. Coordinamos día y hora por correo.</p>
+    <button class="btn" id="btn_contacto" onclick="pedirContacto()">Quiero que me contacten</button>
+    <p class="ctanote">Sin costo y sin compromiso.</p>
+  </div>
+  <div class="cta hidden" id="r_ctaok">
+    <h2>Recibido</h2>
+    <p>Revisamos su resultado y le escribimos a <b id="ok_mail"></b>. Si prefiere adelantarnos algo, puede responder a ese mismo correo.</p>
   </div>
 
   <div class="method" id="r_method"></div>
@@ -648,7 +747,7 @@ const VISTA = 'publica';
 const MOSTRAR_CIFRA_EXTERNA = true;
 
 /* URL /exec de la implementación de Apps Script que registra la respuesta y avisa del lead. */
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbwb-4pUwFHfIvFqZw4tBEEojl5DfwsZn5tGF2hoQiYxallPsVcQ4Ww1FaNXlsVim5VVOg/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbx6EMTr_SmiSWPmUW4lLDqkKvtfUCWysEp8oH7VnCUpzRnc-3_m3osZ7ZUP4k3LvJ4YXg/exec";
 
 const SEM_TXT = { acoplada:'Calibrada', sobre:'Preparación por delante', expuesta:'Brecha relevante', fuera:'Brecha amplia' };
 const SEM_CLS = { acoplada:'v-calibrada', sobre:'v-sobre', expuesta:'v-expuesta', fuera:'v-fuera' };
@@ -656,7 +755,7 @@ const SEM_CLS = { acoplada:'v-calibrada', sobre:'v-sobre', expuesta:'v-expuesta'
 const val    = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
 const round1 = x => Math.round(x * 10) / 10;
 
-document.querySelectorAll('.opt input').forEach(inp => {
+document.querySelectorAll('.opt input[type="radio"]').forEach(inp => {
   inp.addEventListener('change', e => {
     const name = e.target.name;
     document.querySelectorAll(`input[name="${name}"]`).forEach(o => o.closest('.opt').classList.remove('sel'));
@@ -665,6 +764,34 @@ document.querySelectorAll('.opt input').forEach(inp => {
     if (name === 'p12') rutaP13();
   });
 });
+
+/* preguntas de selección múltiple (P19 y P20): tope de dos, y campo libre para "Otro" */
+document.querySelectorAll('.multi').forEach(box => {
+  const name = box.dataset.q, max = parseInt(box.dataset.max);
+  box.querySelectorAll('input[type="checkbox"]').forEach(inp => {
+    inp.addEventListener('change', () => {
+      const marcadas = [...box.querySelectorAll('input:checked')];
+      if (marcadas.length > max){ inp.checked = false; return; }
+      A[name] = marcadas.map(m => m.value);
+      box.querySelectorAll('.opt').forEach(o => {
+        const c = o.querySelector('input').checked;
+        o.classList.toggle('sel', c);
+        o.classList.toggle('off', !c && marcadas.length >= max);
+      });
+      const otro = A[name].includes('Otro');
+      const w = document.getElementById(name + 'otro_w');
+      w.classList.toggle('hidden', !otro);
+      if (!otro) document.getElementById(name + 'otro').value = '';
+    });
+  });
+});
+
+/* lista de la pregunta múltiple, con el texto de "Otro" ya resuelto */
+function multiVal(name){
+  const v = A[name] || [];
+  const libre = val(name + 'otro');
+  return v.map(x => (x === 'Otro' && libre) ? 'Otro: ' + libre : x);
+}
 
 /* ruta condicional: quien no experimenta no puede responder P13 */
 function rutaP13(){
@@ -688,13 +815,13 @@ const REQ = {
   1:['p1'],
   2:['p2','p3','p4','p5'],
   3:['p6','p7','p8','p9','p10','p11'],
-  4:['p12','p14','p15','p16','p17']
+  4:['p12','p14','p15','p16','p17','p19']
 };
 
 function next(n){
   const req = REQ[n].slice();
   if (n === 4 && A.p12 !== 1) req.push('p13');
-  const faltan = req.filter(k => !A[k]);
+  const faltan = req.filter(k => { const v = A[k]; return Array.isArray(v) ? v.length === 0 : !v; });
   const w = document.getElementById('w'+n);
   if (n===1 && (!document.getElementById('f_nombre').value || !document.getElementById('f_email').value || !document.getElementById('f_consent').checked)) faltan.push('datos');
   if (faltan.length){ w.style.display='block'; return; }
@@ -726,9 +853,14 @@ function enviarLead(){
   const nE = nivel(exigencia), nP = nivel(practica), d = nP - nE;
   const key = d === 0 ? 'acoplada' : d > 0 ? 'sobre' : d === -1 ? 'expuesta' : 'fuera';
 
+  const leer = (P.Percibir + P.Anticipar) / 2;
+  const responder = (P.Experimentar + P['Aprender y adaptarse']) / 2;
+
   const payload = {
+    accion: 'respuesta',
     timestamp: new Date().toISOString(),
-    nombre: val('f_nombre'), email: val('f_email'), cargo: val('f_cargo'), organizacion: val('f_org'),
+    nombre: val('f_nombre'), email: val('f_email'), cargo: val('f_cargo'),
+    nivel_responsabilidad: val('f_nivel'), organizacion: val('f_org'),
     rubro: val('f_rubro'), tamano: val('f_tam'), facturacion: val('f_fact'),
     p1: A.p1,
     exigencia_nivel: nE, practica_nivel: nP,
@@ -736,8 +868,13 @@ function enviarLead(){
     exigencia: round1(exigencia), practica: round1(practica),
     percibir: round1(P.Percibir), anticipar: round1(P.Anticipar), integrar: round1(P.Integrar),
     experimentar: round1(P.Experimentar), aprender: round1(P['Aprender y adaptarse']),
+    leer: round1(leer), responder: round1(responder), distancia: round1(leer - responder),
+    bandera_visibilidad: (A.p2 === 5 && A.p5 === 5) ? 'sí' : '',
     agencia: A.p16, expectativa: A.p17,
+    presion: multiVal('p19').join(' · '),
+    barrera: multiVal('p20').join(' · '),
     sorpresa: val('p18'),
+    contacto_solicitado: '',
     respuestas: JSON.stringify(A)
   };
 
@@ -747,6 +884,38 @@ function enviarLead(){
     body: JSON.stringify(payload)
   }).then(() => console.log('[FR] lead registrado'))
     .catch(e => { leadEnviado = false; console.log('[FR] error al registrar el lead:', e); });
+}
+
+/* ============================================================
+   INTENCIÓN DE CONTACTO
+   El botón del cierre no abre el correo: registra la intención
+   en la fila de la persona. Así queda el dato aunque el cliente
+   de correo no esté configurado, y la conversión es medible.
+   ============================================================ */
+let contactoPedido = false;
+function pedirContacto(){
+  if (contactoPedido) return;
+  contactoPedido = true;
+  const btn = document.getElementById('btn_contacto');
+  if (btn) btn.disabled = true;
+
+  if (SHEET_URL){
+    fetch(SHEET_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        accion: 'contacto',
+        timestamp: new Date().toISOString(),
+        email: val('f_email'), nombre: val('f_nombre'), organizacion: val('f_org')
+      })
+    }).then(() => console.log('[FR] contacto solicitado'))
+      .catch(e => console.log('[FR] error al registrar el contacto:', e));
+  }
+
+  document.getElementById('ok_mail').textContent = val('f_email');
+  document.getElementById('r_cta').classList.add('hidden');
+  document.getElementById('r_ctaok').classList.remove('hidden');
+  document.getElementById('r_ctaok').scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
 const nivel = x => x < 2 ? 1 : x < 3 ? 2 : x < 4 ? 3 : 4;
@@ -799,6 +968,43 @@ const LECTURAS = {
   }
 };
 
+/* lectura interpretativa de pantalla · fuente: 07_MATRIZ_INTERPRETACION.md
+   describe → ocurre → desafio. "ocurreBaja" reemplaza a "ocurre" cuando la
+   exigencia del entorno está en nivel 1 o 2 (regla 1 de la matriz: una capacidad
+   poco desarrollada en un terreno que no la exige se registra, no se advierte). */
+const INTERP = {
+  Percibir: {
+    describe:'Cuando esta capacidad aparece poco desarrollada, la organización suele trabajar con la información que llega por los canales de siempre: los clientes actuales, la competencia conocida, la prensa del sector. Lo que se busca está dentro del perímetro de la industria.',
+    ocurre:'Los cambios se reconocen cuando ya son visibles para todos. En ese momento sigue siendo posible responder, con menos tiempo y menos opciones sobre la mesa. Quien lo reconoce antes decide en un terreno más ancho.',
+    ocurreBaja:'Su entorno hoy no exige un rastreo más amplio que el que describe. Conviene mirar qué tendría que cambiar en su sector para que sí lo exija, porque esta capacidad tarda en instalarse y se necesita antes de que haga falta.',
+    desafio:'Ampliar de dónde viene la información que la organización mira, y tener un lugar donde lo que alguien nota llegue a las demás personas antes de que sea evidente.'
+  },
+  Anticipar: {
+    describe:'Cuando esta capacidad aparece poco desarrollada, la planificación suele apoyarse en un futuro único, que rara vez se declara como tal. La incertidumbre se reconoce en la conversación, y el plan mantiene igual una sola versión de lo que va a pasar, que termina funcionando como si fuera el terreno.',
+    ocurre:'Si ese futuro no se cumple, varias decisiones pierden su fundamento al mismo tiempo, porque todas descansaban en la misma premisa. Las inversiones comprometidas son las más difíciles de revertir.',
+    ocurreBaja:'En un entorno como el que describe, planificar sobre un futuro principal es razonable. La conversación que vale la pena es cuál de sus supuestos, si cambiara, obligaría a rehacer el plan completo.',
+    desafio:'Hacer visible el futuro sobre el que ya se está decidiendo, y poner al lado por lo menos otro que sea distinto de verdad y no una variación del primero.'
+  },
+  Integrar: {
+    describe:'Cuando esta capacidad aparece poco desarrollada, suele haber más trabajo de futuro del que se ve en las decisiones. Se leen informes, se conversan tendencias, se producen análisis, y el presupuesto y las prioridades siguen construyéndose con otros criterios.',
+    ocurre:'El trabajo de futuro queda en una posición periférica, interesante y separada de donde se define lo que se hace. Cuando llega una restricción presupuestaria, suele ser lo primero que se corta, y se corta sin resistencia porque nadie puede mostrar qué decisión cambió gracias a él.',
+    ocurreBaja:'Su entorno hoy no está exigiendo decisiones frecuentes a partir de lecturas de futuro. Conviene mirar cuál de las decisiones que vienen sería la primera en necesitarlo.',
+    desafio:'Conectar lo que la organización ya observa con el momento y el lugar donde se decide. Lo que falta aquí no es más análisis.'
+  },
+  Experimentar: {
+    describe:'Cuando esta capacidad aparece poco desarrollada, la organización tiende a resolver la incertidumbre con más análisis y más planificación antes de moverse. Es una respuesta razonable, y tiene un límite: parte de lo que se necesita saber solo aparece al actuar.',
+    ocurre:'Frente a una oportunidad con información incompleta quedan dos caminos, y los dos cuestan. Esperar a tener más certeza cede tiempo. Comprometerse directamente a escala completa hace que el error salga caro.',
+    ocurreBaja:'En un entorno como el que describe, decidir con análisis alcanza en la mayoría de los casos. La pregunta que vale la pena es qué oportunidad se ha dejado pasar por no poder probarla en pequeño.',
+    desafio:'Abrir espacio para apuestas acotadas donde el análisis ya no alcanza, con un costo que la organización pueda perder sin consecuencias.'
+  },
+  'Aprender y adaptarse': {
+    describe:'Cuando esta capacidad aparece poco desarrollada, la organización suele resolver bien el problema que tiene enfrente y seguir. Lo que queda sin revisar es qué se estaba dando por seguro para que ese problema apareciera.',
+    ocurre:'Se corrigen los síntomas mientras permanece intacta la interpretación que los hizo posibles, y la misma clase de sorpresa vuelve más adelante con otra cara. Cada informe que no cambia nada también le enseña algo a la organización.',
+    ocurreBaja:'Su entorno produce pocas sorpresas hoy, así que la práctica de revisarlas tiene poco material con qué trabajar. Conviene mirar qué pasaría con la primera sorpresa grande.',
+    desafio:'Convertir las sorpresas y los errores en revisión de lo que se daba por seguro, con un lugar donde ese aprendizaje quede disponible para la siguiente decisión.'
+  }
+};
+
 /* iconos inline (24x24, trazo currentColor) */
 const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const ICON = {
@@ -812,6 +1018,7 @@ const ICON = {
   Experimentar:      svg('<path d="M9.5 3h5M10.5 3v6l-5 9a1.9 1.9 0 0 0 1.7 2.9h9.6a1.9 1.9 0 0 0 1.7-2.9l-5-9V3"/><path d="M8 15.5h8"/>'),
   'Aprender y adaptarse': svg('<path d="M4.5 12a7.5 7.5 0 0 1 12.4-5.6l1.9 1.8M19.5 12a7.5 7.5 0 0 1-12.4 5.6l-1.9-1.8"/><path d="M18.8 4.4v4h-4M5.2 19.6v-4h4"/>'),
   brechas:  svg('<circle cx="10.5" cy="10.5" r="6"/><path d="M19.5 19.5l-4.7-4.7"/>'),
+  dist:     svg('<path d="M4 7h9M4 17h16"/><path d="M10.5 4.5L13 7l-2.5 2.5M13.5 14.5L16 17l-2.5 2.5"/>'),
   prior:    svg('<path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/>'),
   quote:    svg('<path d="M9 7H6a3 3 0 0 0-3 3v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2"/><path d="M20 7h-3a3 3 0 0 0-3 3v3a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2"/>'),
   featDoc:  svg('<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5M10 13h5M10 17h5"/>'),
@@ -868,53 +1075,87 @@ function render(){
       </div>
     </div>`;
 
-  /* ---- 1b. perfil de las cinco capacidades (público) ---- */
+  /* ---- 1b. la distancia entre leer y responder ----
+     Integrar queda fuera de los dos términos a propósito: es la bisagra por la
+     que una lectura se convierte en decisión, y es lo que explica la distancia. */
+  const leer = (pilares[0][1] + pilares[1][1]) / 2;
+  const responder = (pilares[3][1] + pilares[4][1]) / 2;
+  const dist = leer - responder;
+  const UMBRAL = 0.75;
+  let distTxt = '';
+  if (dist >= UMBRAL) {
+    distTxt = `<div class="rsection">Lee más de lo que mueve</div>
+      <div class="callout">${ICON.dist}<div>
+        <p>Su organización observa y piensa el futuro más de lo que se mueve a partir de eso. Lo que se ve venir llega con anticipación, y convertirlo en decisiones, pruebas o cambios concretos toma más trabajo.</p>
+      </div></div>`;
+  } else if (dist <= -UMBRAL) {
+    distTxt = `<div class="rsection">Se mueve más de lo que lee</div>
+      <div class="callout">${ICON.dist}<div>
+        <p>Su organización reacciona y aprende sobre la marcha, con menos exploración previa. Eso funciona bien con lo que ya llegó. La pregunta que abre es qué pasa con lo que todavía no llega, y cuánto cuesta cada corrección hecha sobre la marcha.</p>
+      </div></div>`;
+  }
+  document.getElementById('r_dist').innerHTML = !distTxt ? '' : `
+    <div class="card">
+      ${distTxt}
+      <div class="metric" style="margin-top:18px">
+        <div class="mh"><b>Leer el cambio</b><span>${dec(leer)} de 5</span></div>
+        <div class="bar"><span style="width:${pct(leer)}%" class="${dist>=UMBRAL?'':'dim'}"></span></div>
+      </div>
+      <div class="metric">
+        <div class="mh"><b>Responder al cambio</b><span>${dec(responder)} de 5</span></div>
+        <div class="bar"><span style="width:${pct(responder)}%" class="${dist<=-UMBRAL?'':'dim'}"></span></div>
+      </div>
+      <p class="small" style="margin-top:12px">Leer reúne sus respuestas sobre buscar cambios y trabajar con futuros posibles. Responder reúne las de probar en pequeño y convertir el aprendizaje en cambios. Entre las dos queda Integrar, la capacidad de llevar una lectura hasta la decisión, que por eso no entra en ninguna de las dos.</p>
+    </div>`;
+
   const bandaPilar = n => n <= 2
       ? { t:'Requiere atención', c:'lv-bajo' }
       : n === 3 ? { t:'En desarrollo', c:'lv-medio' } : { t:'Más desarrollado', c:'lv-alto' };
-  document.getElementById('r_pilf').innerHTML = `
-    <div class="card">
-      <div class="rsection">Su perfil de capacidades</div>
-      <p class="small" style="margin-bottom:18px">Así aparecen en sus respuestas las cinco capacidades que mide Future Readiness. Es un orden relativo entre ellas, no una medición de cada una.</p>
-      <div class="pilgrid">
-        ${pilares.map(([n,v]) => { const b = bandaPilar(nivel(v)); return `
-          <div class="pilrow ${b.c}">
-            <span class="picon">${ICON[n]}</span>
-            <div class="pmain">
-              <div class="ptop"><span class="pname">${n}</span><span class="pband">${b.t}</span></div>
-              <span class="prail"><i style="width:${Math.max(pct(v),8)}%"></i></span>
-              <span class="psub">${LECTURAS[n].sub}</span>
-            </div>
-          </div>`; }).join('')}
-      </div>
-      <div class="pillegend">
-        <span><b style="background:var(--orange)"></b>Requiere atención</span>
-        <span><b style="background:var(--warn)"></b>En desarrollo</span>
-        <span><b style="background:var(--ok)"></b>Más desarrollado</span>
-      </div>
-    </div>`;
 
-  /* ---- 2. dónde aparecen las principales brechas ---- */
-  const nombresDebiles = debiles.map(p=>p[0]);
-  const parejo = nombresDebiles.length === pilares.length;
-  const listaDebiles = nombresDebiles.length === 1
-      ? `<b>${nombresDebiles[0]}</b>`
-      : nombresDebiles.slice(0,-1).map(n=>`<b>${n}</b>`).join(', ') + ' y <b>' + nombresDebiles.slice(-1) + '</b>';
-  document.getElementById('r_weak').innerHTML = `
-    <div class="card">
-      <div class="rsection">${parejo ? 'Un perfil parejo' : 'Dónde aparecen las principales brechas'}</div>
-      <div class="callout">
-        ${ICON.brechas}
-        <div>
-          ${parejo
-            ? `<p>Las cinco capacidades que mide este instrumento aparecen en un nivel equivalente en sus respuestas. Ninguna queda claramente por detrás de las otras.</p>
-               <p class="small">La conversación entonces se mueve desde dónde está la brecha hacia qué sostiene estas prácticas y qué pasaría si la exigencia del entorno cambia.</p>`
-            : `<p>De las cinco capacidades, ${nombresDebiles.length === 1 ? 'la que aparece con menor desarrollo en sus respuestas es' : 'las que aparecen con menor desarrollo en sus respuestas son'} ${listaDebiles}.</p>
-               ${nombresDebiles.length === 1 ? `<p class="small">${LECTURAS[nombresDebiles[0]].sub}.</p>` : ''}`}
-          ${completa ? '' : '<p class="small" style="color:var(--muted-dim)">La lectura de cada capacidad, con sus riesgos y líneas de trabajo, se hace en la sesión.</p>'}
-        </div>
-      </div>
-    </div>`;
+  /* ---- 2. la lectura interpretativa ----
+     Una sola capacidad: la de menor desarrollo entre las que la exigencia del
+     entorno vuelve relevantes. Tres párrafos: qué describe, qué puede ocurrir,
+     qué desafío abre. Aquí no se nombra ningún instrumento de la casa. */
+  const parejo = debiles.length === pilares.length;
+  const sorpresa = document.getElementById('p18').value.trim();
+  const candidatas = pilares.filter(p => p[1] < exigencia).sort((a,b) => a[1]-b[1]);
+  const pool = candidatas.length ? candidatas : debiles;
+  /* Desempate cuando dos capacidades comparten el mínimo: si la persona narró una
+     sorpresa, manda la capacidad que la matriz cruza con ella (regla 4). */
+  const empatadas = pool.filter(p => p[1] === pool[0][1]);
+  const foco = (sorpresa && empatadas.length > 1)
+      ? (empatadas.find(p => p[0] === 'Aprender y adaptarse') || empatadas.find(p => p[0] === 'Percibir') || empatadas[0])
+      : empatadas[0];
+  const exigBaja = nE <= 2;
+  /* la sorpresa entra solo donde la matriz la cruza: notar el cambio antes, o aprender de él */
+  const cruzaSorpresa = sorpresa && (foco[0] === 'Percibir' || foco[0] === 'Aprender y adaptarse');
+
+  let cuerpo;
+  if (parejo) {
+    cuerpo = `<div class="rsection">Un perfil parejo</div>
+      <div class="callout">${ICON.brechas}<div>
+        <p>Sus cinco capacidades aparecen en un nivel de desarrollo similar, sin una que quede claramente por detrás. En ese caso la lectura no está en el perfil sino en el nivel: lo que importa es la relación entre lo que su entorno exige y lo que su organización practica, que es lo que muestran las dos cifras de arriba.</p>
+      </div></div>`;
+  } else if (key === 'sobre') {
+    const integrar = pilares.find(p => p[0] === 'Integrar')[1];
+    cuerpo = `<div class="rsection">Qué conviene mirar</div>
+      <div class="callout">${ICON.brechas}<div>
+        <p><b>Qué suele describir.</b> Su organización sostiene prácticas de anticipación por encima de lo que su entorno le está pidiendo hoy. Puede ser preparación deliberada para un cambio que ya ven venir, y puede ser actividad que se mantiene por inercia propia.</p>
+        <p style="margin-top:12px"><b>Qué conviene mirar.</b> La capacidad de integrar es la que distingue los dos casos. Cuando el trabajo de futuro llega a la decisión, lo que hay es preparación real y la conversación es cómo sostenerla. Cuando no llega, hay esfuerzo y presupuesto produciendo lecturas que no cambian lo que la organización hace. ${integrar >= 3.5 ? 'En sus respuestas, esa capacidad aparece entre las más desarrolladas.' : 'En sus respuestas, esa capacidad aparece entre las menos desarrolladas.'}</p>
+        <p style="margin-top:12px"><b>El desafío que abre.</b> Verificar cuál de los dos casos es el suyo, mirando decisiones concretas de los últimos doce meses.</p>
+      </div></div>`;
+  } else {
+    const I = INTERP[foco[0]];
+    cuerpo = `<div class="rsection">Dónde aparece la brecha principal</div>
+      <p class="small" style="margin:-4px 0 18px">De sus cinco capacidades, la que aparece con menor desarrollo frente a lo que su entorno exige es <b>${foco[0]}</b>.</p>
+      <div class="callout">${ICON.brechas}<div>
+        <p><b>Qué suele describir.</b> ${I.describe}</p>
+        <p style="margin-top:12px"><b>Qué puede ocurrir.</b> ${exigBaja ? I.ocurreBaja : I.ocurre}</p>
+        ${cruzaSorpresa ? `<p style="margin-top:12px"><b>En su caso.</b> Usted nombró como sorpresa reciente: <em>“${sorpresa.replace(/</g,'&lt;')}”</em>. La capacidad que aparece con menor desarrollo en sus respuestas es justamente la que trabaja sobre ese tipo de situación.</p>` : ''}
+        <p style="margin-top:12px"><b>El desafío que abre.</b> ${I.desafio}</p>
+      </div></div>`;
+  }
+  document.getElementById('r_weak').innerHTML = `<div class="card">${cuerpo}</div>`;
 
   /* ---- 3. contraste con la respuesta inicial ---- */
   const nPrior = nivel(A.p1);
@@ -928,16 +1169,11 @@ function render(){
       </div>
     </div>` : '';
 
-  /* ---- 4. su respuesta abierta ---- */
-  const txt = document.getElementById('p18').value.trim();
-  document.getElementById('r_quote').innerHTML = txt ? `
-    <div class="card">
-      <div class="rsection">Lo que usted nombró</div>
-      <div class="quotebox"><em>“${txt.replace(/</g,'&lt;')}”</em></div>
-      <p class="small" style="margin-top:16px">Eso ya ocurrió y ya tuvo un costo. Es el punto por donde parte la conversación.</p>
-    </div>` : '';
+  /* La respuesta de P18 ya no se devuelve como bloque propio: se usa dentro de
+     la lectura interpretativa cuando cruza con la capacidad menos desarrollada,
+     y en los demás casos se guarda para la sesión. */
 
-  /* ---- 4b. un dato externo para dimensionar (vista pública) ---- */
+  /* ---- 4. un dato externo para dimensionar (vista pública) ---- */
   let datoExterno = '';
   if (MOSTRAR_CIFRA_EXTERNA && (key === 'expuesta' || key === 'fuera')) {
     datoExterno = 'Un estudio longitudinal sobre preparación de futuro y desempeño empresarial siguió a un grupo de empresas durante siete años. Entre las que tenían deficiencias en sus prácticas, el <b>9% mejoró</b> su posición de rentabilidad y el <b>91% la mantuvo o la perdió</b>.';
@@ -1033,17 +1269,83 @@ function render(){
       <p class="small" style="margin-top:8px;color:var(--muted-dim)">Son dos ejes de la imagen del futuro (Polak): expectativa y agencia. No entran en el puntaje de la organización y no evalúan a la persona. Sirven para abrir la conversación.</p>
     </div>`;
 
-  /* ---- CTA: qué incluye la sesión ---- */
+  /* ---- qué midió cada grupo de preguntas ----
+     Va entre el resultado general y su detalle: el lector nunca vio los nombres
+     de estas capacidades durante el cuestionario, así que sin este mapa el resto
+     de la pantalla habla de dimensiones que aparecen de la nada.
+     La exigencia del entorno se dibuja como una línea que cruza las cinco barras.
+     Es el argumento del instrumento hecho gráfico: la preparación se juzga contra
+     el terreno y no contra un ideal, así que lo que importa es qué llega a la
+     línea y qué no. Ninguna capacidad muestra cifra: dos preguntas sostienen una
+     banda, y eso es lo que se dibuja. */
+  const bandaEnt = v => v < 2.5 ? 'baja' : (v <= 3.5 ? 'media' : 'alta');
+  const RANGOS = { 'Percibir':'06 · 07', 'Anticipar':'08 · 09', 'Integrar':'10 · 11',
+                   'Experimentar':'12 · 13', 'Aprender y adaptarse':'14 · 15' };
+  /* la pista arranca tras las dos primeras columnas del grid (58 + 12 + 168 + 12) */
+  const PISTA = 250;
+  const pExig = pct(exigencia);
+  const filaCap = ([nom, v]) => {
+    const b = bandaPilar(nivel(v)), w = pct(v), dentro = w >= 42;
+    const rng = (nom === 'Experimentar' && A.p12 === 1) ? '12' : RANGOS[nom];
+    return `
+    <div class="lisrow ${b.c}">
+      <span class="rng">${rng}</span>
+      <span class="nm">${nom}</span>
+      <span class="listrack">
+        <i style="width:${Math.max(w,4)}%">${dentro ? b.t.toUpperCase() : ''}</i>
+        ${dentro ? '' : `<em style="left:calc(${Math.max(w,4)}% + 10px)">${b.t.toUpperCase()}</em>`}
+        <b style="left:${pExig}%"></b>
+      </span>
+    </div>`;
+  };
+  const bajo = pilares.filter(pp => pp[1] < exigencia).length;
+  const cuenta = {0:'Ninguna de las cinco capacidades queda', 1:'Una de las cinco capacidades queda',
+                  2:'Dos de las cinco capacidades quedan', 3:'Tres de las cinco capacidades quedan',
+                  4:'Cuatro de las cinco capacidades quedan', 5:'Las cinco capacidades quedan'}[bajo];
+  const priorLbl = {1:'nada preparada',2:'poco preparada',3:'medianamente preparada',
+                    4:'bastante preparada',5:'muy preparada'}[A.p1];
+
+  document.getElementById('r_map').innerHTML = `
+    <div class="card">
+      <div class="rsection">Qué midió cada grupo de preguntas</div>
+      <p class="small" style="margin:-4px 0 20px">Durante el cuestionario no aparecen los nombres de estos grupos, porque saber qué mide un bloque cambia la forma de responderlo. Este es el mapa de lo que acaba de contestar.</p>
+
+      <div class="lisenv">
+        <span class="lab">SU ENTORNO</span>
+        <span class="val">Nivel ${nE} de 4</span>
+        <span class="dims"><b>Complejidad ${bandaEnt(complejidad)}</b> (02 · 03) &nbsp;·&nbsp; <b>volatilidad ${bandaEnt(volatilidad)}</b> (04 · 05)<br>
+          <span style="font-size:12.5px">Se toma la mayor de las dos, porque cualquiera eleva la exigencia por sí sola</span></span>
+      </div>
+
+      <div class="liswrap">
+        <div class="lismobnote">La línea punteada marca lo que su entorno exige</div>
+        <div class="lisline" style="left:calc(${PISTA}px + (100% - ${PISTA}px) * ${(pExig/100).toFixed(4)})">
+          <em class="${pExig >= 45 ? 'izq' : 'der'}">lo que su entorno exige</em>
+        </div>
+        ${pilares.map(filaCap).join('')}
+      </div>
+
+      <div class="lisfoot">${cuenta} por debajo de lo que su entorno exige. Cada una se estima con dos preguntas, lo que permite ordenarlas entre sí y no medir cada una por separado, así que se muestran con una banda y no con un puntaje. El promedio de las cinco deja su práctica en <b>nivel ${nP} de 4</b>.${A.p12 === 1 ? ' Experimentar se estimó con una sola pregunta, porque la segunda no aplicaba en su caso.' : ''}</div>
+
+      <div class="lisout">
+        <div><span class="rn">01</span><b>Su primera impresión</b>Respondió ${priorLbl}, antes de pensarlo. Se compara con el resultado que produjeron sus propias respuestas.</div>
+        <div><span class="rn">16 · 17</span><b>Su mirada, no la de su organización</b>Cuánto siente que puede influir en ese futuro, y qué espera de él. Se leen por separado, en la conversación.</div>
+        <div><span class="rn">18 · 20</span><b>El contexto de su caso</b>La sorpresa que nombró, la presión que espera y lo que cree que frenaría la respuesta.</div>
+      </div>
+    </div>`;
+
+  /* ---- CTA: qué pasa si pide contacto ---- */
   document.getElementById('r_ctafeat').innerHTML = `
-    <div>${ICON.featDoc}<span>Lectura personalizada según su contexto y objetivos.</span></div>
-    <div>${ICON.featRisk}<span>Identificación de riesgos y oportunidades prioritarias.</span></div>
-    <div>${ICON.featPath}<span>Exploración de caminos para fortalecer sus capacidades.</span></div>`;
+    <div>${ICON.featDoc}<span>Revisamos su resultado completo, con el detalle que no cabe en pantalla.</span></div>
+    <div>${ICON.featRisk}<span>Le escribimos con una lectura de su caso y de su sector.</span></div>
+    <div>${ICON.featPath}<span>Cuando hay algo concreto que trabajar, proponemos una sesión de 45 minutos.</span></div>`;
 
   /* ---- nota de método ---- */
-  const nPreg = (A.p12 === 1) ? 17 : 18;
+  const nPreg = (A.p12 === 1) ? 19 : 20;
   document.getElementById('r_method').innerHTML = `
     <b>Nota de método.</b> Este instrumento tiene ${nPreg} preguntas y se responde en pocos minutos. Mide lo que usted percibe, no lo que una auditoría verificaría, y su resultado es orientativo.
     La forma de calcularlo evalúa la preparación como la relación entre lo que el entorno exige y lo que la organización practica, en lugar de medirla contra un ideal. Las preguntas sobre el entorno se adaptaron de las escalas de complejidad y volatilidad de Day y Schoemaker (2005). La estructura de capacidades sigue el trabajo de Rohrbeck y Kum (2018). Las dos preguntas sobre cómo mira usted el futuro recogen los dos ejes de la imagen del futuro descritos por Polak (1973): la expectativa sobre lo que viene y el sentido de agencia para influir en ello. Quedan fuera del puntaje.
+    Cada capacidad se estima con dos preguntas, lo que permite ordenar unas respecto de otras dentro de una misma respuesta y no medir cada una por separado. Las preguntas de una misma capacidad van juntas, lo que tiende a hacerlas más parecidas entre sí de lo que serían por separado.
     Nuestra adaptación al español y al contexto organizacional no hereda las propiedades psicométricas de las escalas originales.`;
 }
 
