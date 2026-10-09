@@ -354,38 +354,8 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
 
 <!-- ============ PASO 1 ============ -->
 <section id="s1" class="hidden">
-  <div class="stepmeta"><span class="mono">Paso 1 de 4</span><span class="mono">Sus datos</span></div>
+  <div class="stepmeta"><span class="mono">Paso 1 de 4</span></div>
   <div class="progress"><span class="on"></span><span></span><span></span><span></span></div>
-
-  <div class="card">
-    <h2>Para preparar su lectura</h2>
-    <p class="small" style="margin-bottom:20px">Usamos estos datos para preparar su resultado y para contactarlo si usted lo autoriza.</p>
-    <div class="grid2">
-      <div class="field"><label for="f_nombre">Nombre y apellido</label><input type="text" id="f_nombre"></div>
-      <div class="field"><label for="f_email">Correo corporativo</label><input type="email" id="f_email"></div>
-      <div class="field"><label for="f_cargo">Cargo</label><input type="text" id="f_cargo"></div>
-      <div class="field"><label for="f_nivel">Nivel de responsabilidad</label><select id="f_nivel">
-        <option value="">Seleccionar</option><option>Dirección o gerencia general</option><option>Gerencia de área</option>
-        <option>Jefatura o subgerencia</option><option>Profesional o especialista</option><option>Otro</option></select></div>
-      <div class="field"><label for="f_org">Organización</label><input type="text" id="f_org"></div>
-      <div class="field"><label for="f_rubro">Rubro</label><select id="f_rubro">
-        <option value="">Seleccionar</option><option>Minería y recursos</option><option>Energía</option>
-        <option>Banca y servicios financieros</option><option>Salud</option><option>Educación</option>
-        <option>Retail y consumo</option><option>Industria y manufactura</option><option>Construcción e inmobiliario</option>
-        <option>Agro y alimentos</option><option>Tecnología</option><option>Servicios profesionales</option>
-        <option>Sector público</option><option>Gremio, fundación u ONG</option><option>Otro</option></select></div>
-      <div class="field"><label for="f_tam">Número de personas que trabajan en la organización</label><select id="f_tam">
-        <option value="">Seleccionar</option><option>Menos de 50</option><option>50 a 199</option>
-        <option>200 a 999</option><option>1.000 o más</option></select></div>
-    </div>
-    <div class="field"><label for="f_fact">Facturación anual aproximada <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><select id="f_fact">
-      <option value="">Prefiero no responder</option><option>Menos de USD 1 millón</option><option>USD 1 a 10 millones</option>
-      <option>USD 10 a 50 millones</option><option>USD 50 a 200 millones</option><option>Más de USD 200 millones</option></select></div>
-    <div class="consent">
-      <input type="checkbox" id="f_consent">
-      <label for="f_consent" style="font-weight:400;font-size:12.5px">Autorizo a Memética el tratamiento de mis datos para preparar el resultado de esta lectura y contactarme. No se comparten con terceros con fines comerciales. El detalle de qué datos recogemos, por cuánto tiempo y cómo ejercer sus derechos está en la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>, que se abre en una pestaña nueva sin perder sus respuestas.</label>
-    </div>
-  </div>
 
   <div class="card">
     <div class="q">
@@ -401,7 +371,7 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
       </div>
     </div>
   </div>
-  <div class="warnmsg" id="w1">Faltan datos por completar en este paso.</div>
+  <div class="warnmsg" id="w1">Faltan preguntas por responder en este paso.</div>
   <div class="nav-btns"><button class="btn ghost" onclick="go(0)">Atrás</button><button class="btn" onclick="next(1)">Continuar</button></div>
 </section>
 
@@ -687,7 +657,39 @@ footer.sitefoot .small { max-width:46ch; font-size:11.5px; }
       </div>
       <div class="field otrofield hidden" id="p20otro_w"><input type="text" id="p20otro" placeholder="¿Cuál?"></div>
     </div>
-  <div class="warnmsg" id="w4">Faltan preguntas por responder en este paso.</div>
+  </div>
+
+  <div class="card">
+    <h2>Para preparar su lectura</h2>
+    <p class="small" style="margin-bottom:20px">Usamos estos datos para preparar su resultado y para contactarlo si usted lo autoriza.</p>
+    <div class="grid2">
+      <div class="field"><label for="f_nombre">Nombre y apellido</label><input type="text" id="f_nombre"></div>
+      <div class="field"><label for="f_email">Correo corporativo</label><input type="email" id="f_email"></div>
+      <div class="field"><label for="f_cargo">Cargo</label><input type="text" id="f_cargo"></div>
+      <div class="field"><label for="f_nivel">Nivel de responsabilidad</label><select id="f_nivel">
+        <option value="">Seleccionar</option><option>Dirección o gerencia general</option><option>Gerencia de área</option>
+        <option>Jefatura o subgerencia</option><option>Profesional o especialista</option><option>Otro</option></select></div>
+      <div class="field"><label for="f_org">Organización</label><input type="text" id="f_org"></div>
+      <div class="field"><label for="f_rubro">Rubro</label><select id="f_rubro">
+        <option value="">Seleccionar</option><option>Minería y recursos</option><option>Energía</option>
+        <option>Banca y servicios financieros</option><option>Salud</option><option>Educación</option>
+        <option>Retail y consumo</option><option>Industria y manufactura</option><option>Construcción e inmobiliario</option>
+        <option>Agro y alimentos</option><option>Tecnología</option><option>Servicios profesionales</option>
+        <option>Sector público</option><option>Gremio, fundación u ONG</option><option>Otro</option></select></div>
+      <div class="field"><label for="f_tam">Número de personas que trabajan en la organización</label><select id="f_tam">
+        <option value="">Seleccionar</option><option>Menos de 50</option><option>50 a 199</option>
+        <option>200 a 999</option><option>1.000 o más</option></select></div>
+    </div>
+    <div class="field"><label for="f_fact">Facturación anual aproximada <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><select id="f_fact">
+      <option value="">Prefiero no responder</option><option>Menos de USD 1 millón</option><option>USD 1 a 10 millones</option>
+      <option>USD 10 a 50 millones</option><option>USD 50 a 200 millones</option><option>Más de USD 200 millones</option></select></div>
+    <div class="consent">
+      <input type="checkbox" id="f_consent">
+      <label for="f_consent" style="font-weight:400;font-size:12.5px">Autorizo a Memética el tratamiento de mis datos para preparar el resultado de esta lectura y contactarme. No se comparten con terceros con fines comerciales. El detalle de qué datos recogemos, por cuánto tiempo y cómo ejercer sus derechos está en la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>, que se abre en una pestaña nueva sin perder sus respuestas.</label>
+    </div>
+  </div>
+
+  <div class="warnmsg" id="w4">Faltan preguntas o datos por completar en este paso.</div>
   <div class="nav-btns"><button class="btn ghost" onclick="go(3)">Atrás</button><button class="btn" onclick="next(4)">Ver mi resultado</button></div>
 </section>
 
@@ -823,7 +825,7 @@ function next(n){
   if (n === 4 && A.p12 !== 1) req.push('p13');
   const faltan = req.filter(k => { const v = A[k]; return Array.isArray(v) ? v.length === 0 : !v; });
   const w = document.getElementById('w'+n);
-  if (n===1 && (!document.getElementById('f_nombre').value || !document.getElementById('f_email').value || !document.getElementById('f_consent').checked)) faltan.push('datos');
+  if (n===4 && (!document.getElementById('f_nombre').value || !document.getElementById('f_email').value || !document.getElementById('f_consent').checked)) faltan.push('datos');
   if (faltan.length){ w.style.display='block'; return; }
   w.style.display='none';
   if (n===4){ render(); go(5); enviarLead(); } else { go(n+1); }
